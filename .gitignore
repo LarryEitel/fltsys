@@ -9,7 +9,7 @@ include
 Lib
 Scripts
 tmp
-
+site_media
 private
 
 local_settings.py
