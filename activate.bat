@@ -1,0 +1,11 @@
+@echo off
+set OSGEO4W_ROOT=C:\OSGeo4W
+PATH=%OSGEO4W_ROOT%\bin;%PATH%
+for %%f in (%OSGEO4W_ROOT%\etc\ini\*.bat) do call %%f
+
+/_envs/g/Scripts/activate.bat
+
+@echo on
+
+@cmd.exe
+
