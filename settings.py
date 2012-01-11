@@ -1,5 +1,6 @@
 # Django settings for spine project.
 import os
+import posixpath
 
 PROJECT_ROOT = os.path.dirname(__file__)
 
