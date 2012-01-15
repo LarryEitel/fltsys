@@ -2,7 +2,7 @@
 *.pyo
 *.db
 *.log
-
+*.DS_Store
 bin
 lib
 include
