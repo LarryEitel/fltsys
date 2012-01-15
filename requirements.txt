@@ -5,6 +5,7 @@ django-tastypie==0.9.11
 pystache==0.3.1
 
 django-extensions
+django-registration==0.7
 
 # used in: https://github.com/ggerrietts/vertebrate-django/blob/add-edit/requirements.txt
 #Jinja2==2.6

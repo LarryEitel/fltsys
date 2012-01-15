@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'django.contrib.gis',
@@ -138,7 +139,13 @@ INSTALLED_APPS = (
     'address',
     "world",
     'gunicorn',
+    'registration',
 )
+
+#Registration Settings
+ACCOUNT_ACTIVATION_DAYS = 3
+DEFAULT_FROM_EMAIL = "noreply@defaultroject.com"
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -170,3 +177,6 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
