@@ -82,6 +82,7 @@ STATICFILES_DIRS = [
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -120,6 +121,13 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, "templates"),
 )
 
+# http://stackoverflow.com/questions/6990721/whats-the-best-way-to-use-coffeescript-with-django-if-youre-developing-on-wind
+COMPRESS_PRECOMPILERS = (
+    ('text/coffeescript', 'coffee --compile --stdio'),
+)
+
+COFFEESCRIPT_EXECUTABLE = "coffee"
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -131,6 +139,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.gis',
     "django_extensions",
+    #'coffeescript',
+    'compressor',
     'tastypie',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
