@@ -5,7 +5,8 @@ import posixpath
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 DEBUG = False
-TEMPLATE_DEBUG = DEBUG
+#TEMPLATE_DEBUG = DEBUG
+TEMPLATE_DEBUG = True
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -146,6 +147,9 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'common',
     'address',
+    "core",
+    "current_user",
+    "boundaries",
     "world",
     'gunicorn',
 )

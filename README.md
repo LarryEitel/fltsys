@@ -2,7 +2,7 @@
 
 ## This is a work in progress. We are looking for contributors/collaborators.
 
-## Purpose
+## Goals
 
 * manage territory boundaries
 * manage points of interest
@@ -14,11 +14,13 @@
 * python
 * django
 * geodjango
+* geos
 * tastypie
 * google maps
 * backbone.js
 * coffee.script
 * jquery
+* underscore
 
 # INSTALLATION
 

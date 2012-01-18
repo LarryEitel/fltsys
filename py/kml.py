@@ -1,8 +1,27 @@
+#import wingdbstub
 import re
 import sys
+import cPickle as pickle
 import simplejson as json
+
 JSONDIR = '../private/json/'
+PKLDIR = '../private/pkl/'
 KMLDIR = '../private/kml/'
+
+# territory boundaries
+xml = open(KMLDIR + 'territory_boundaries.kml').read()
+items = re.findall("<coordinates>(.*?)</coordinates>", xml)
+boundaries = []
+for item in items:
+    pts = re.findall(r"(?P<latlong>.*?,.*?),0\.00 ", item)
+    boundaries.append(pts)
+    
+pickle.dump( boundaries, open( PKLDIR + "territories.pkl", "wb" ) )   
+
+sys.exit()
+
+
+
 
 
 # block_numbers
