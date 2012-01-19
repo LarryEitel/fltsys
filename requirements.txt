@@ -9,7 +9,6 @@ django-coffeescript
 django-debug-toolbar
 django-boss
 
-
 # used in: https://github.com/ggerrietts/vertebrate-django/blob/add-edit/requirements.txt
 #Jinja2==2.6
 #Pygments==1.4
