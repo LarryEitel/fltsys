@@ -1,5 +1,5 @@
-# Django settings for spine project.
 import os
+import sys
 import posixpath
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
@@ -111,6 +111,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 )
 
 ROOT_URLCONF = 'urls'
@@ -140,6 +141,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.gis',
     "django_extensions",
+    "debug_toolbar",
     #'coffeescript',
     'compressor',
     'tastypie',
