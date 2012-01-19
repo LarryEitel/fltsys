@@ -93,7 +93,7 @@ class Boundary(MyModel):
      
         # Get outer rings coordinates
         outercoords = i.getElementsByTagName("outerBoundaryIs")[0].getElementsByTagName("coordinates")[0].firstChild.nodeValue.strip()
-     
+        
         # Start outer ring output
         output += '('
      
@@ -117,7 +117,7 @@ class Boundary(MyModel):
             output += ",("
      
             # For each point in coordinates, add to output
-            for pt in outcoords.split(' '):
+            for pt in outercoords.split(' '):
                 lon,lat,elev = pt.split(',')
                 output += lon + " " + lat + ","
      
@@ -195,30 +195,30 @@ class Boundary(MyModel):
         return u'boundary'
     
     def __unicode__(self):
-        return self.full_name + ' | ' + self.number_path
+        return self.full_name + ' | ' + self.number_path + ' : ' + str(self.id)
         #return self.name
  
-    def save(self, *args, **kw):
-        #if not self.label_pt:
-            #from django.contrib.gis.geos import GEOSGeometry           
-            ##self.label_pt = self.pt_from_long_lat(pt[0], pt[1])
-            #pt = self.center_pt
-            #self.label_pt = GEOSGeometry('POINT(%s %s)' % (pt[0], pt[1]))
-            ##self.label_pt = 'POINT(%s %s)' % (pt[0], pt[1])
+    #def save(self, *args, **kw):
+        ##if not self.label_pt:
+            ##from django.contrib.gis.geos import GEOSGeometry           
+            ###self.label_pt = self.pt_from_long_lat(pt[0], pt[1])
+            ##pt = self.center_pt
+            ##self.label_pt = GEOSGeometry('POINT(%s %s)' % (pt[0], pt[1]))
+            ###self.label_pt = 'POINT(%s %s)' % (pt[0], pt[1])
             
-        #if self.pri_address_mapurl:
-            #match = re.search(r"&ll=(-?\d+.\d+),(-?\d+.\d+)", self.pri_address_mapurl, re.IGNORECASE)
-            #if match:
-                #self.pri_address_lat = match.group(1)
-                #self.pri_address_long = match.group(2)
+        ##if self.pri_address_mapurl:
+            ##match = re.search(r"&ll=(-?\d+.\d+),(-?\d+.\d+)", self.pri_address_mapurl, re.IGNORECASE)
+            ##if match:
+                ##self.pri_address_lat = match.group(1)
+                ##self.pri_address_long = match.group(2)
 
-            #if 'http://' not in self.pri_address_mapurl.lower():
-                #self.pri_address_mapurl = 'http://' + self.pri_address_mapurl
+            ##if 'http://' not in self.pri_address_mapurl.lower():
+                ##self.pri_address_mapurl = 'http://' + self.pri_address_mapurl
 
-        #if self.webpage and 'http://' not in self.webpage.lower():
-                #self.webpage = 'http://' + self.webpage
+        ##if self.webpage and 'http://' not in self.webpage.lower():
+                ##self.webpage = 'http://' + self.webpage
 
-        super(Boundary, self).save(*args, **kw)
+        #super(Boundary, self).save(*args, **kw)
         
     
     #def add_parent(self, boundary):
