@@ -63,7 +63,6 @@ MEDIA_URL = ''
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
 STATIC_ROOT = os.path.join(PROJECT_ROOT, "site_media", "static")
-STATIC_ROOT = os.path.join(PROJECT_ROOT, "static")
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -137,7 +136,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    #'django.contrib.staticfiles',
+    'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'django.contrib.gis',
@@ -145,6 +144,7 @@ INSTALLED_APPS = (
     "debug_toolbar",
     #'coffeescript',
     'compressor',
+    'olwidget',
     'tastypie',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
@@ -156,6 +156,8 @@ INSTALLED_APPS = (
     "world",
     'gunicorn',
 )
+
+GOOGLE_API_KEY = ''
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

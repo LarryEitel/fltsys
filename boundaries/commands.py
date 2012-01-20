@@ -1,6 +1,7 @@
 # https://github.com/zacharyvoase/django-boss
 # http://docs.python.org/dev/library/argparse.html
 from djboss.commands import *
+# a copy of this file should be copied to djboss app dir
 import wingdbstub
 
 @command
