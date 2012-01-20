@@ -99,11 +99,13 @@ var olwidget = {
             return new OpenLayers.Layer.Google("Google Physical",
                     {sphericalMercator: true, type: google.maps.MapTypeId.TERRAIN});
         },
+        /*
         satellite: function() {
             return new OpenLayers.Layer.Google("Google Satellite",
                     {sphericalMercator: true, type: google.maps.MapTypeId.SATELLITE,
                         numZoomLevels: 22});
         },
+        */
         hybrid: function() {
             return new OpenLayers.Layer.Google("Google Hybrid",
                     {sphericalMercator: true, type: google.maps.MapTypeId.HYBRID, numZoomLevels: 20});
