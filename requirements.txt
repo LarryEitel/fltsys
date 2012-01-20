@@ -8,7 +8,9 @@ django-extensions
 django-coffeescript
 django-debug-toolbar
 django-boss
--e git://github.com/yourcelf/olwidget.git#egg=django-olwidget
+
+# had to manually install the following
+#-e git://github.com/yourcelf/olwidget.git#egg=django-olwidget
 
 # used in: https://github.com/ggerrietts/vertebrate-django/blob/add-edit/requirements.txt
 #Jinja2==2.6
