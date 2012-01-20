@@ -10,6 +10,7 @@ class BoundaryAdmin(GeoModelAdmin):
     }
     list_map = ['poly']
     
+    
 class BoundaryTypeAdmin(admin.ModelAdmin):
     pass
 
