@@ -11,6 +11,7 @@ def boundarytypes(args):
         print bt.name + ' - ' + bt.title + ':', bt.id
         
     
+    
 @command
 @argument('kmlfilename', help="kml filename only")
 @argument('boundary_type_id', type=int, help="Boundary Type ID")
