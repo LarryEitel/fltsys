@@ -157,7 +157,7 @@ INSTALLED_APPS = (
     'gunicorn',
 )
 
-GOOGLE_API_KEY = ''
+GOOGLE_API_KEY = 'ABQIAAAA7EHoBVg-afV-31BS0PskPxQA_ihIzGih6r-gZzpca5UCE7OJZBRXZIV_rBhC-2hL5RY_qPuF6gVOPA'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
