@@ -5,7 +5,6 @@ from boundaries.models import Boundary, BoundaryType, BoundariesRelated
 # Customize the map
 class BoundaryAdmin(GeoModelAdmin):
     options = {
-        #'layers': ['google.streets', 'google.satellite'],
         'layers': ['google.streets'],
     }
     list_map = ['poly']
