@@ -193,11 +193,7 @@ LOGGING = {
 try:
     from local_settings import *
 except ImportError:
-<<<<<<< HEAD
     pass
-=======
-    pass
-
+  
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
->>>>>>> dev
