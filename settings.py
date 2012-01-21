@@ -137,6 +137,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     'django.contrib.gis',
@@ -155,9 +156,17 @@ INSTALLED_APPS = (
     "boundaries",
     "world",
     'gunicorn',
+    'registration',
 )
 
+<<<<<<< HEAD
 #GOOGLE_API_KEY = 'ABQIAAAA7EHoBVg-afV-31BS0PskPxQA_ihIzGih6r-gZzpca5UCE7OJZBRXZIV_rBhC-2hL5RY_qPuF6gVOPA'
+=======
+#Registration Settings
+ACCOUNT_ACTIVATION_DAYS = 3
+DEFAULT_FROM_EMAIL = "noreply@defaultroject.com"
+
+>>>>>>> dev
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -188,4 +197,11 @@ LOGGING = {
 try:
     from local_settings import *
 except ImportError:
+<<<<<<< HEAD
     pass
+=======
+    pass
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+>>>>>>> dev
