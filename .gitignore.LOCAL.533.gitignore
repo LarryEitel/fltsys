@@ -8,7 +8,6 @@ lib
 include
 Lib
 Scripts
-
 tmp
 site_media
 private

@@ -100,9 +100,13 @@ var olwidget = {
                     {sphericalMercator: true, type: google.maps.MapTypeId.TERRAIN});
         },
         satellite: function() {
+            /*
             return new OpenLayers.Layer.Google("Google Satellite",
                     {sphericalMercator: true, type: google.maps.MapTypeId.SATELLITE,
                         numZoomLevels: 22});
+            */
+            return new OpenLayers.Layer.Google("Google Streets",
+                    {sphericalMercator: true, numZoomLevels: 20});
         },
         hybrid: function() {
             return new OpenLayers.Layer.Google("Google Hybrid",

@@ -2,13 +2,16 @@
 *.pyo
 *.db
 *.log
+<<<<<<< HEAD
 *.DS_Store
 bin
 lib
 include
 Lib
 Scripts
+=======
 
+>>>>>>> e182d688cc6894db7c2085796e93e4d3b8179eb1
 tmp
 site_media
 private

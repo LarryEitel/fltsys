@@ -6,6 +6,11 @@ pystache==0.3.1
 
 django-extensions
 django-coffeescript
+django-debug-toolbar
+django-boss
+
+# had to manually install the following
+#-e git://github.com/yourcelf/olwidget.git#egg=django-olwidget
 
 # used in: https://github.com/ggerrietts/vertebrate-django/blob/add-edit/requirements.txt
 #Jinja2==2.6

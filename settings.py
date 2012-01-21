@@ -1,11 +1,12 @@
-# Django settings for spine project.
 import os
+import sys
 import posixpath
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 DEBUG = False
-TEMPLATE_DEBUG = DEBUG
+#TEMPLATE_DEBUG = DEBUG
+TEMPLATE_DEBUG = True
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -110,6 +111,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 )
 
 ROOT_URLCONF = 'urls'
@@ -139,16 +141,23 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.gis',
     "django_extensions",
+    "debug_toolbar",
     #'coffeescript',
     'compressor',
+    'olwidget',
     'tastypie',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
     'common',
     'address',
+    "core",
+    "current_user",
+    "boundaries",
     "world",
     'gunicorn',
 )
+
+#GOOGLE_API_KEY = 'ABQIAAAA7EHoBVg-afV-31BS0PskPxQA_ihIzGih6r-gZzpca5UCE7OJZBRXZIV_rBhC-2hL5RY_qPuF6gVOPA'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
