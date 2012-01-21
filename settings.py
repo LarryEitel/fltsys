@@ -159,14 +159,10 @@ INSTALLED_APPS = (
     'registration',
 )
 
-<<<<<<< HEAD
 #GOOGLE_API_KEY = 'ABQIAAAA7EHoBVg-afV-31BS0PskPxQA_ihIzGih6r-gZzpca5UCE7OJZBRXZIV_rBhC-2hL5RY_qPuF6gVOPA'
-=======
 #Registration Settings
 ACCOUNT_ACTIVATION_DAYS = 3
 DEFAULT_FROM_EMAIL = "noreply@defaultroject.com"
-
->>>>>>> dev
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
