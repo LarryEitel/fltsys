@@ -5,7 +5,7 @@ from world.models import WorldBorder
 # Customize the map
 class WorldBorderAdmin(GeoModelAdmin):
     options = {
-        'layers': ['google.streets'],
+        'layers': ['google.streets', 'google.hybrid'],
     }
     list_map = ['mpoly']
     
