@@ -24,6 +24,7 @@ django_compressor
 #mock==0.7.2
 #wsgiref==0.1.2
 
+
 # Had to manually work and save this in project
 #django-olwidget
 #mysql-python
