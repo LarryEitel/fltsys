@@ -8,6 +8,7 @@ django-extensions
 django-coffeescript
 django-debug-toolbar
 django-boss
+django-flatblocks
 
 # had to manually install the following
 #-e git://github.com/yourcelf/olwidget.git#egg=django-olwidget

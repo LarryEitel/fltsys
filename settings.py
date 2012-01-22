@@ -91,6 +91,7 @@ SECRET_KEY = '_7pr#bc70r5ck6$lf)ydgk*vjsfod5rl*cz8ao8&07+a-7ia3m'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
+    "djaml.filesystem",
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
@@ -145,6 +146,7 @@ INSTALLED_APPS = (
     "debug_toolbar",
     #'coffeescript',
     'compressor',
+    "flatblocks",
     'olwidget',
     'tastypie',
     # Uncomment the next line to enable admin documentation:

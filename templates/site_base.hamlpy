@@ -1,0 +1,128 @@
+!!! 5
+- load i18n
+- load media
+- load flatblock_tags    
+%html{"lang": "en", "itemscope":"", "itemtype":"http://schema.org/Organization", "xmlns:fb":"http://ogp.me/ns/fb#"}
+
+	%head
+		%meta{"charset": "utf-8"}
+		- block meta_description
+			%meta{"name": "description", "content": "Foreign Language Territory System"}
+		  
+		%meta{"name": "google-site-verification", "content": ""}
+		%meta{"itemprop":"name", "content": "Foreign Language Territory System"}
+		%meta{"itemprop":"image", "content": "http://fltsys.org/static/img/logo.png"}
+		
+		- block meta_keywords
+			%meta{"name": "keywords", "content": "google map, territory, territories, django, pinax, python"}
+		  
+		%meta{"name": "rating", "content": "general"}
+		%meta{"name": "classification", "content": "Research"}
+		%meta{"name": "copyright", "content": "2011 OrgTec"}
+		%meta{"name": "author", "content": "2011 OrgTec"}
+		
+		
+		- block meta_robots
+			%meta{"name": "robots", "content": "index, follow"}
+		
+		%title 
+			FLT System :
+			- block head_title
+		
+		%link{"href": "{{ STATIC_URL }}pinax/css/base.css", "rel": "stylesheet"}/
+		%link{"href": "{{ STATIC_URL }}css/digg_paginator.css", "rel": "stylesheet"}/
+		- include_media "main.css"
+		-# %link{"href": "{{ STATIC_URL }}pinax/css/tabs.css", "rel": "stylesheet"}/
+		-# %link{"href": "{{ STATIC_URL }}pinax/css/facebox.css", "rel": "stylesheet"}/
+		-# %link{"href": "{{ STATIC_URL }}pinax/css/announcements.css", "rel": "stylesheet"}/
+		-# %link{"href": "{{ STATIC_URL }}pinax/css/accounts.css", "rel": "stylesheet"}/
+		-# %link{"href": "{{ STATIC_URL }}uni_form/uni-form.css", "rel": "stylesheet"}/
+		
+		%link{"href": "{{ STATIC_URL }}css/print.css", "media": "print", "rel": "stylesheet"}/
+		
+		
+	
+		-# site_media\static\x\img
+		-# see: http://mathiasbynens.be/notes/touch-icons
+		%link{"rel": "shortcut icon", "href": "{{ STATIC_URL }}img/favicon.ico"}
+		%link{"rel": "apple-touch-icon", "href": "{{ STATIC_URL }}img/apple-touch-icon.png"}
+		%link{"rel": "apple-touch-icon-precomposed", "href": "{{ STATIC_URL }}img/apple-touch-icon.png"}
+		-# For first-generation iPad:
+		%link{"rel": "apple-touch-icon-precomposed", "sizes": "72x72", "href": "{{ STATIC_URL }}img/apple-touch-icon-72x72-precomposed.png"}
+		-# For iPhone 4 with high-resolution Retina display:
+		%link{"rel": "apple-touch-icon-precomposed", "sizes": "114x114", "href": "{{ STATIC_URL }}img/apple-touch-icon-114x114-precomposed.png"}
+		
+		- block extra_head
+	
+	%body
+		%a{'name':'top'}
+		#topwrap
+			- include "shared/topbar.hamlpy"
+		  
+		#mainwrapper
+			#main.maincontents
+				.background
+					.centered
+						-# 
+							.searchwrapper
+								.pageheader
+									- include "shared/headerbar.hamlpy"
+									- include "shared/messages.hamlpy"
+							  
+						  
+						#main-content
+							-# if apptitle > ''
+							-# block appbar
+								#appbar
+									%h1.apptitle
+										  = apptitle|safe
+							  
+							-# if pagetitle != None
+							-# block pageheader
+								#pageheader
+									%h2.text
+										= pagetitle|safe
+									.esc-separator{"style": "opacity: 1; background-color: rgb(142, 142, 142);"}
+						
+						#content
+							%noscript
+								.noscript
+									.noscript-inner
+										%p
+											<strong>JavaScript seem to be disabled in your browser.</strong>
+										%p
+											You must have JavaScript enabled in your browser to utilize the functionality of this website.
+							
+							- block body
+
+						#footer
+							- block footer
+							
+							- include "shared/footer.hamlpy"
+							
+					
+		       
+-# if not user.is_staff 
+	- flatblock "JotForms"		
+		  
+
+		  
+		  
+		  
+		  
+		  
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
