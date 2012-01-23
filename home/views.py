@@ -6,4 +6,5 @@ from django.shortcuts import render_to_response
 
 
 class HomeView(TemplateView):
+
     template_name = "home/base.hamlpy"

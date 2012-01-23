@@ -1,0 +1,8 @@
+- extends "site_base.html"
+
+- block body
+    - if user.is_authenticated  
+        %p hello user
+    - else
+        %p hello guest
+    
