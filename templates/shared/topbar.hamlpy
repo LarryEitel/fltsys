@@ -1,0 +1,67 @@
+-# see for nice top bar: http://www.computing.net/answers/programming/copy-only-new-or-modified-files/24045.html
+#xbarwrap
+  #xbar
+    #xbarleft
+      %ol.xbartc
+        -# %li.home_icon_link
+        %li.xbar
+          -# %a.home_icon_link{"href": "/", "title": "FLT System Home"}
+          %a{"href": "/", "title": "FLT System Home"}
+            %span.xbarwrap
+              FLT System Home
+              
+        - if user.is_authenticated  
+          %li.xbar
+            %a{"href": "/trs/", "title": "Territories"}
+              %span.xbarwrap
+                Territories
+          %li.xbar
+            %a{"href": "/dsts/", "title": "Districts"}
+              %span.xbarwrap
+                Districts
+          %li.xbar
+            %a{"href": "/pois/", "title": "Points of Interest"}
+              %span.xbarwrap
+                Points of Interest
+              
+    #xbarright
+      %ol.xbartc
+        -#
+          %li.xbar
+            %a{"href": "{% url acct_email %}", "title": "Personalize"}
+              %span.xbarwrap
+                Personalize
+        -# See: - include "_account_bar.html"
+        -# C:\_x\parts\omelette\pinax\templates\default\_account_bar.html
+          
+        - if user.is_authenticated
+          %li.xbar
+            %span.xbarwrap
+                %b USER
+                
+          %li.xbar
+            %a{"href": "url acct_email", "title": "Account"}
+              %span.xbarwrap
+                Account
+                
+          - if user.is_staff
+            %li.xbar
+              %a{"href": "/admin/", "title": "Admin"} 
+                %span.xbarwrap
+                  Admin
+                
+          %li.xbar
+            %a{"href": "url acct_logout", "title": "Logout"} 
+              %span.xbarwrap
+                Sign out
+                  
+        - else
+          %li.xbar
+            %a{"href": "url acct_login", "title": "Login"} 
+              %span.xbarwrap
+                Log in
+              -#
+                or
+                %a{"href": "url acct_signup", "title": "Sign Up"} 
+                  %span.xbarwrap
+                    Sign Up

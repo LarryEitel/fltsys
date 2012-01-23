@@ -1,0 +1,33 @@
+body {
+  background: white;
+}
+#topwrap, #ctsmngcols, #ctsviewas, .ctsversiondropdown, .ctsgotop {
+  display: none;
+}
+#search {
+  display: none;
+}
+#donate {
+  display: none;
+}
+.verses-grid .ctsversionname {
+  display: block;
+}
+
+#mainwrap, #main {	
+  width: auto;
+  border: 0;
+  margin: 0 0;
+  padding: 0;
+  float: none !important;	
+  color: black; 
+  background: transparent;
+}
+#main {
+}
+a:link, a:visited {
+  color: black;
+  background: transparent;
+  font-weight: normal;
+  text-decoration: none;
+}

@@ -1,0 +1,60 @@
+#headerbar
+  background: none repeat scroll 0 0 $light
+  border-bottom: 1px solid #E5E5E5
+  height: 80px
+  overflow: hidden
+  position: relative
+  
+
+#logo
+  float: left
+  .logo
+    background-color: whitesmoke
+    background-image: url($imagepath + "logo100x50.png")
+    background-position: left center
+    background-repeat: no-repeat
+    //background-size: 117px 71px
+    //color: rgba(0, 0, 0, 0.2)
+    cursor: pointer
+    display: block
+    border: 0
+    font-size: 15px
+    height: 50px
+    line-height: 50px
+    margin-top: 7px
+    margin-left: $left-column-margin
+    width: 100px
+  h1
+    margin-top: 7px
+    margin-left: $left-column-margin
+    color: $dark
+    font-weight: 600
+    font-size: 12px
+    letter-spacing: 0.5ex
+      
+#donate
+  display: block
+  height: 38px
+  overflow: hidden
+  position: absolute
+  right: 13px
+  top: 0
+  width: 200px
+  
+.tooltip
+  background: url($imagepath + "black_arrow_bottom.png") repeat scroll 0 0 transparent
+  color: #F3F6E9
+  display: none
+  font-size: 14px
+  height: 70px
+  padding: 35px 25px 25px
+  width: 160px
+  z-index: 9000
+  a
+    color: $orange
+  a:hover
+    // @extend .hover
+    text-decoration: none
+
+  a, a:active, a:visited
+    text-decoration: underline

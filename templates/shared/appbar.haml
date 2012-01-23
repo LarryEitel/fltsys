@@ -1,0 +1,21 @@
+.appbar
+  .appnamewrapper
+    .appname
+      = @item[:title]
+  #notifybox{:style => "visibility: hidden;"}
+    .notify
+      %span#notifytext
+      %span.undotext
+        %a#notifyundolink{:href => "#"}Undo
+  .inheader
+    .appbarwrapper
+      .mainappbar
+        #subselect.inlineblock.button.buttonstandard
+          %span
+            Bible Navigation
+          <small>v</small>
+      .sideappbar
+        %span
+          #personalize.inlineblock.button.buttonstandard
+            Personalize
+  .clearheader

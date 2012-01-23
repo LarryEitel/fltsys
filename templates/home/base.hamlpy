@@ -1,4 +1,4 @@
-- extends "site_base.hamlpy"
+- extends "site_base.html"
 - load flatblock_tags
 
 - block head_title

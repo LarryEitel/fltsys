@@ -1,6 +1,5 @@
 !!! 5
 - load i18n
-- load media
 - load flatblock_tags    
 %html{"lang": "en", "itemscope":"", "itemtype":"http://schema.org/Organization", "xmlns:fb":"http://ogp.me/ns/fb#"}
 
@@ -29,15 +28,7 @@
 			FLT System :
 			- block head_title
 		
-		%link{"href": "{{ STATIC_URL }}pinax/css/base.css", "rel": "stylesheet"}/
-		%link{"href": "{{ STATIC_URL }}css/digg_paginator.css", "rel": "stylesheet"}/
-		- include_media "main.css"
-		-# %link{"href": "{{ STATIC_URL }}pinax/css/tabs.css", "rel": "stylesheet"}/
-		-# %link{"href": "{{ STATIC_URL }}pinax/css/facebox.css", "rel": "stylesheet"}/
-		-# %link{"href": "{{ STATIC_URL }}pinax/css/announcements.css", "rel": "stylesheet"}/
-		-# %link{"href": "{{ STATIC_URL }}pinax/css/accounts.css", "rel": "stylesheet"}/
-		-# %link{"href": "{{ STATIC_URL }}uni_form/uni-form.css", "rel": "stylesheet"}/
-		
+		%link{"href": "{{ STATIC_URL }}css/style.css", "media": "print", "rel": "stylesheet"}/
 		%link{"href": "{{ STATIC_URL }}css/print.css", "media": "print", "rel": "stylesheet"}/
 		
 		

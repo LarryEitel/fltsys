@@ -137,7 +137,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    
+    # http://stackoverflow.com/questions/7698406/how-to-configure-django-compressor-and-django-staticfiles-with-amazons-s3
+    #'django.contrib.staticfiles',
+    'staticfiles',
+    
     'django.contrib.humanize',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',

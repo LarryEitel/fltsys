@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- http://blog.geotitles.com/2011/09/creating-the-new-top-black-bar-found-in-google-and-all-its-products/ -->
+<title>Creating Google Plus Top Black Menu Bar Live Demo | http://blog.geotitles.com</title>
+<noscript><br>Your browser must support javascript.</br></noscript>
+
+<script type="text/javascript" src="static/js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="static/js/google_menu.js"></script>
+<link rel="stylesheet" type="text/css" href="static/css/google_menu.css"/>
+
+<script>
+        $('document').ready(function(){
+            $('.menu').fixedMenu();
+        });
+        </script>
+</head>
+<body>
+<div class="menu">
+    <ul>
+      <li class="single-link"><!-- Using class="single-link" for links with no dropdown -->
+        <a target="_blank" href="http://plus.google.com">+You</a>
+        </li>
+        <!-- Using class="current" for the link of the current page -->
+      <li class="current">
+        <a target="_blank" href="http://www.google.co.in/">Web</a>
+        </li>
+      <li class="single-link"><!-- Using class="single-link" for links with no dropdown -->
+        <a target="_blank" href="http://orkut.com">Orkut</a>
+        </li>
+      <li class="single-link"><!-- Using class="single-link" for links with no dropdown -->
+        <a target="_blank" href="http://gmail.com">Gmail</a>
+        </li>
+      <li class="single-link"><!-- Using class="single-link" for links with no dropdown -->
+        <a target="_blank" href="https://www.google.com/calendar">Calendar</a>
+        </li>
+      <li class="single-link"><!-- Using class="single-link" for links with no dropdown -->
+        <a target="_blank" href="https://docs.google.com">Documents</a>
+        </li>
+      <li class="single-link"><!-- Using class="single-link" for links with no dropdown -->
+        <a target="_blank" href="http://picasaweb.google.co.in/home">Photos</a>
+        </li>
+      <li><!-- Do not add any class for links with dropdown -->
+        <a href="#">More<span class="arrow"></span></a>
+        <!-- Drop Down menu Items -->
+<ul>
+            <li><a href="http://www.google.co.in/reader">Reader</a></li>
+            <li><a href="https://sites.google.com">Sites</a></li>
+            <li><a href="http://groups.google.co.in">Groups</a></li>
+            <li><a href="http://www.youtube.com">YouTube</a></li>
+            <li>
+            <div class="mid-line">
+            </div>
+            </li>
+            <li><a href="http://www.google.co.in/imghp?hl=en&tab=wi">Images</a></li>
+            <li><a href="http://maps.google.co.in/maps?hl=en&tab=wl">Maps</a></li>
+            <li><a href="http://translate.google.co.in/">Translate</a></li>
+            <li><a href="http://books.google.co.in">Books</a></li>
+            <li><a href="http://scholar.google.co.in/">Scholar</a></li>
+            <li><a href="http://blogsearch.google.co.in">Blogs</a></li>
+            <li>
+            <div class="mid-line">
+            </div>
+            </li>
+            <li><a href="http://www.google.co.in/intl/en/options/">even more >></a></li>
+            <li>
+            <div class="mid-line">
+            </div>
+            </li>
+        </ul>
+        </li>
+    </ul>
+</div>
+<div align="center">
+</div>
+</body>
+</html>
