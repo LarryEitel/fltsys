@@ -1,12 +1,13 @@
 import os
 import sys
 import posixpath
+import socket
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 # trying to get a clean windows virtual env
 PRODUCTION_SERVERS = ['xc',]
-if os.environ['COMPUTERNAME'] in PRODUCTION_SERVERS:
+if socket.gethostname() in PRODUCTION_SERVERS:
     PRODUCTION = True
     VENV_ROOT = PROJECT_ROOT
     sys.path.append(PROJECT_ROOT)
