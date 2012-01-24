@@ -33,6 +33,9 @@
 * virtualenv --no-site-packages flt
 * /_envs/flt/Scripts/activate.bat
 * pip install -r requirements.txt
+* cd /_flt
+* pip install django-evernote-oauth
+* mv django-evernote-oauth evernote_oauth
 * python manage.py syncdb
 * python manage.py runserver
 

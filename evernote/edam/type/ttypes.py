@@ -323,13 +323,13 @@ class UserAttributes(object):
      <dd>A code indicating where the user was sent from. AKA
       promotion code
      </dd>
-      
+  
    <dt>sentEmailDate</dt>
      <dd>The most recent date when the user sent outbound
       emails from the service.  Used with sentEmailCount to limit the number
       of emails that can be sent per day.
      </dd>
-      
+  
    <dt>sentEmailCount</dt>
      <dd>The number of emails that were sent from the user
       via the service on sentEmailDate.  Used to enforce a limit on the number
@@ -382,7 +382,7 @@ class UserAttributes(object):
    <dt>groupName</dt>
      <dd>A name identifier used to identify a particular set of branding and
       light customization.</dd>
-      
+  
    <dt>recognitionLanguage</dt>
      <dd>a 2 character language codes based on:
          http://ftp.ics.uci.edu/pub/ietf/http/related/iso639.txt
@@ -823,7 +823,7 @@ class UserAttributes(object):
 class Accounting(object):
   """
    This represents the bookkeeping information for the user's subscription.
-   
+  
   <dl>
    <dt>uploadLimit</dt>
      <dd>The number of bytes that can be uploaded to the account
@@ -1593,6 +1593,115 @@ class Tag(object):
   def __ne__(self, other):
     return not (self == other)
 
+class LazyMap(object):
+  """
+  A structure that wraps a map of name/value pairs whose values are not
+  always present in the structure in order to reduce space when obtaining
+  batches of entities that contain the map.  When a client provides a LazyMap
+  to the server, the fullMap field must be set and the keysOnly field will
+  be ignored by the server.  When the server provides the client with a
+  LazyMap, it will fill in either the keysOnly field or the fullMap field,
+  but not both, based on the API and parameters.
+  
+  Check the API documentation of the individual calls involving the LazyMap
+  for full details including the constraints of the names and values of the
+  map.
+  
+  <dl>
+  <dt>keysOnly</dt>
+    <dd>The set of keys for the map.  This field is ignored by the
+        server when set.
+    </dd>
+  
+  <dt>fullMap</dt>
+    <dd>The complete map, including all keys and values.
+    </dd>
+  </dl>
+  
+  Attributes:
+   - keysOnly
+   - fullMap
+  """
+
+  thrift_spec = (
+    None, # 0
+    (1, TType.SET, 'keysOnly', (TType.STRING,None), None, ), # 1
+    (2, TType.MAP, 'fullMap', (TType.STRING,None,TType.STRING,None), None, ), # 2
+  )
+
+  def __init__(self, keysOnly=None, fullMap=None,):
+    self.keysOnly = keysOnly
+    self.fullMap = fullMap
+
+  def read(self, iprot):
+    if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
+      fastbinary.decode_binary(self, iprot.trans, (self.__class__, self.thrift_spec))
+      return
+    iprot.readStructBegin()
+    while True:
+      (fname, ftype, fid) = iprot.readFieldBegin()
+      if ftype == TType.STOP:
+        break
+      if fid == 1:
+        if ftype == TType.SET:
+          self.keysOnly = set()
+          (_etype17, _size14) = iprot.readSetBegin()
+          for _i18 in xrange(_size14):
+            _elem19 = iprot.readString();
+            self.keysOnly.add(_elem19)
+          iprot.readSetEnd()
+        else:
+          iprot.skip(ftype)
+      elif fid == 2:
+        if ftype == TType.MAP:
+          self.fullMap = {}
+          (_ktype21, _vtype22, _size20 ) = iprot.readMapBegin() 
+          for _i24 in xrange(_size20):
+            _key25 = iprot.readString();
+            _val26 = iprot.readString();
+            self.fullMap[_key25] = _val26
+          iprot.readMapEnd()
+        else:
+          iprot.skip(ftype)
+      else:
+        iprot.skip(ftype)
+      iprot.readFieldEnd()
+    iprot.readStructEnd()
+
+  def write(self, oprot):
+    if oprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and self.thrift_spec is not None and fastbinary is not None:
+      oprot.trans.write(fastbinary.encode_binary(self, (self.__class__, self.thrift_spec)))
+      return
+    oprot.writeStructBegin('LazyMap')
+    if self.keysOnly != None:
+      oprot.writeFieldBegin('keysOnly', TType.SET, 1)
+      oprot.writeSetBegin(TType.STRING, len(self.keysOnly))
+      for iter27 in self.keysOnly:
+        oprot.writeString(iter27)
+      oprot.writeSetEnd()
+      oprot.writeFieldEnd()
+    if self.fullMap != None:
+      oprot.writeFieldBegin('fullMap', TType.MAP, 2)
+      oprot.writeMapBegin(TType.STRING, TType.STRING, len(self.fullMap))
+      for kiter28,viter29 in self.fullMap.items():
+        oprot.writeString(kiter28)
+        oprot.writeString(viter29)
+      oprot.writeMapEnd()
+      oprot.writeFieldEnd()
+    oprot.writeFieldStop()
+    oprot.writeStructEnd()
+
+  def __repr__(self):
+    L = ['%s=%r' % (key, value)
+      for key, value in self.__dict__.iteritems()]
+    return '%s(%s)' % (self.__class__.__name__, ', '.join(L))
+
+  def __eq__(self, other):
+    return isinstance(other, self.__class__) and self.__dict__ == other.__dict__
+
+  def __ne__(self, other):
+    return not (self == other)
+
 class ResourceAttributes(object):
   """
   Structure holding the optional attributes of a Resource
@@ -1652,10 +1761,27 @@ class ResourceAttributes(object):
     </dd>
   
   <dt>attachment</dt>
-    <dd>this will be true if the resource is a Premium file attachment.  This
-    will be available within the search grammar so that you can identify
-    notes that contain attachments.
+    <dd>this will be true if the resource should be displayed as an attachment,
+    or false if the resource should be displayed inline (if possible).
     </dd>
+  
+  <dt>applicationData</dt>
+  <dd>Provides a location for applications to store a relatively small
+  (4kb) blob of data associated with a Resource that is not visible to the user
+  and that is opaque to the Evernote service. A single application may use at most
+  one entry in this map, using its API consumer key as the map key. See the
+  documentation for LazyMap for a description of when the actual map values
+  are returned by the service.
+  <p>To safely add or modify your application's entry in the map, use
+  NoteStore.setResourceApplicationDataEntry. To safely remove your application's
+  entry from the map, use NoteStore.unsetResourceApplicationDataEntry.</p>
+  Minimum length of a name (key): EDAM_APPLICATIONDATA_NAME_LEN_MIN
+  <br/>
+  Sum max size of key and value: EDAM_APPLICATIONDATA_ENTRY_LEN_MAX
+  <br/>
+  Syntax regex for name (key): EDAM_APPLICATIONDATA_NAME_REGEX
+  </dd>
+  
   </dl>
   
   Attributes:
@@ -1670,6 +1796,7 @@ class ResourceAttributes(object):
    - recoType
    - fileName
    - attachment
+   - applicationData
   """
 
   thrift_spec = (
@@ -1685,9 +1812,10 @@ class ResourceAttributes(object):
     (9, TType.STRING, 'recoType', None, None, ), # 9
     (10, TType.STRING, 'fileName', None, None, ), # 10
     (11, TType.BOOL, 'attachment', None, None, ), # 11
+    (12, TType.STRUCT, 'applicationData', (LazyMap, LazyMap.thrift_spec), None, ), # 12
   )
 
-  def __init__(self, sourceURL=None, timestamp=None, latitude=None, longitude=None, altitude=None, cameraMake=None, cameraModel=None, clientWillIndex=None, recoType=None, fileName=None, attachment=None,):
+  def __init__(self, sourceURL=None, timestamp=None, latitude=None, longitude=None, altitude=None, cameraMake=None, cameraModel=None, clientWillIndex=None, recoType=None, fileName=None, attachment=None, applicationData=None,):
     self.sourceURL = sourceURL
     self.timestamp = timestamp
     self.latitude = latitude
@@ -1699,6 +1827,7 @@ class ResourceAttributes(object):
     self.recoType = recoType
     self.fileName = fileName
     self.attachment = attachment
+    self.applicationData = applicationData
 
   def read(self, iprot):
     if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
@@ -1764,6 +1893,12 @@ class ResourceAttributes(object):
           self.attachment = iprot.readBool();
         else:
           iprot.skip(ftype)
+      elif fid == 12:
+        if ftype == TType.STRUCT:
+          self.applicationData = LazyMap()
+          self.applicationData.read(iprot)
+        else:
+          iprot.skip(ftype)
       else:
         iprot.skip(ftype)
       iprot.readFieldEnd()
@@ -1817,6 +1952,10 @@ class ResourceAttributes(object):
     if self.attachment != None:
       oprot.writeFieldBegin('attachment', TType.BOOL, 11)
       oprot.writeBool(self.attachment)
+      oprot.writeFieldEnd()
+    if self.applicationData != None:
+      oprot.writeFieldBegin('applicationData', TType.STRUCT, 12)
+      self.applicationData.write(oprot)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()
@@ -2132,13 +2271,14 @@ class NoteAttributes(object):
   
   <dt>source</dt>
     <dd>the method that the note was added to the account, if the
-    note wasn't directly authored in an Evernote client.
+    note wasn't directly authored in an Evernote desktop client.
     <br/>
     Length:  EDAM_ATTRIBUTE_LEN_MIN - EDAM_ATTRIBUTE_LEN_MAX
     </dd>
   
   <dt>sourceURL</dt>
-    <dd>the original location where the resource was hosted
+    <dd>the original location where the resource was hosted. For web clips,
+    this will be the URL of the page that was clipped.
     <br/>
     Length:  EDAM_ATTRIBUTE_LEN_MIN - EDAM_ATTRIBUTE_LEN_MAX
     </dd>
@@ -2153,11 +2293,60 @@ class NoteAttributes(object):
   
   <dt>shareDate</dt>
    <dd>The date and time when this note was directly shared via its own URL.
-   This is only set on notes that were individually shared, it's independent
-   of any notebook-level sharing of the containing notepbook.  This field
-   is treated as "read-only" for clients ... the server will ignore changes
+   This is only set on notes that were individually shared - it is independent
+   of any notebook-level sharing of the containing notepbook. This field
+   is treated as "read-only" for clients; the server will ignore changes
    to this field from an external client.
    </dd>
+  
+  <dt>placeName</dt>
+  <dd>Allows the user to assign a human-readable location name associated
+  with a note. Users may assign values like 'Home' and 'Work'. Place
+  names may also be populated with values from geonames database
+  (e.g., a restaurant name). Applications are encouraged to normalize values
+  so that grouping values by place name provides a useful result. Applications
+  MUST NOT automatically add place name values based on geolocation without
+  confirmation from the user; that is, the value in this field should be
+  more useful than a simple automated lookup based on the note's latitude
+  and longitude.</dd>
+  
+  <dt>contentClass</dt>
+  <dd>The class (or type) of note. This field is used to indicate to
+  clients that special structured information is represented within
+  the note such that special rules apply when making
+  modifications. If contentClass is set and the client
+  application does not specifically support the specified class,
+  the client MUST treat the note as read-only. In this case, the
+  client MAY modify the note's notebook and tags via the
+  Note.notebookGuid and Note.tagGuids fields.
+  <p>Applications should set contentClass only when they are creating notes
+  that contain structured information that needs to be maintained in order
+  for the user to be able to use the note within that application.
+  Setting contentClass makes a note read-only in other applications, so
+  there is a trade-off when an application chooses to use contentClass.
+  Applications that set contentClass when creating notes must use a contentClass
+  string of the form <i>CompanyName.ApplicationName</i> to ensure uniqueness.</p>
+  Length restrictions: EDAM_ATTRIBUTE_LEN_MIN, EDAM_ATTRIBUTE_LEN_MAX
+  <br/>
+  Regex: EDAM_ATTRIBUTE_REGEX
+  </dd>
+  
+  <dt>applicationData</dt>
+  <dd>Provides a location for applications to store a relatively small
+  (4kb) blob of data that is not meant to be visible to the user and
+  that is opaque to the Evernote service. A single application may use at most
+  one entry in this map, using its API consumer key as the map key. See the
+  documentation for LazyMap for a description of when the actual map values
+  are returned by the service.
+  <p>To safely add or modify your application's entry in the map, use
+  NoteStore.setNoteApplicationDataEntry. To safely remove your application's
+  entry from the map, use NoteStore.unsetNoteApplicationDataEntry.</p>
+  Minimum length of a name (key): EDAM_APPLICATIONDATA_NAME_LEN_MIN
+  <br/>
+  Sum max size of key and value: EDAM_APPLICATIONDATA_ENTRY_LEN_MAX
+  <br/>
+  Syntax regex for name (key): EDAM_APPLICATIONDATA_NAME_REGEX
+  </dd>
   
   </dl>
   
@@ -2171,6 +2360,9 @@ class NoteAttributes(object):
    - sourceURL
    - sourceApplication
    - shareDate
+   - placeName
+   - contentClass
+   - applicationData
   """
 
   thrift_spec = (
@@ -2192,9 +2384,15 @@ class NoteAttributes(object):
     (15, TType.STRING, 'sourceURL', None, None, ), # 15
     (16, TType.STRING, 'sourceApplication', None, None, ), # 16
     (17, TType.I64, 'shareDate', None, None, ), # 17
+    None, # 18
+    None, # 19
+    None, # 20
+    (21, TType.STRING, 'placeName', None, None, ), # 21
+    (22, TType.STRING, 'contentClass', None, None, ), # 22
+    (23, TType.STRUCT, 'applicationData', (LazyMap, LazyMap.thrift_spec), None, ), # 23
   )
 
-  def __init__(self, subjectDate=None, latitude=None, longitude=None, altitude=None, author=None, source=None, sourceURL=None, sourceApplication=None, shareDate=None,):
+  def __init__(self, subjectDate=None, latitude=None, longitude=None, altitude=None, author=None, source=None, sourceURL=None, sourceApplication=None, shareDate=None, placeName=None, contentClass=None, applicationData=None,):
     self.subjectDate = subjectDate
     self.latitude = latitude
     self.longitude = longitude
@@ -2204,6 +2402,9 @@ class NoteAttributes(object):
     self.sourceURL = sourceURL
     self.sourceApplication = sourceApplication
     self.shareDate = shareDate
+    self.placeName = placeName
+    self.contentClass = contentClass
+    self.applicationData = applicationData
 
   def read(self, iprot):
     if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
@@ -2259,6 +2460,22 @@ class NoteAttributes(object):
           self.shareDate = iprot.readI64();
         else:
           iprot.skip(ftype)
+      elif fid == 21:
+        if ftype == TType.STRING:
+          self.placeName = iprot.readString();
+        else:
+          iprot.skip(ftype)
+      elif fid == 22:
+        if ftype == TType.STRING:
+          self.contentClass = iprot.readString();
+        else:
+          iprot.skip(ftype)
+      elif fid == 23:
+        if ftype == TType.STRUCT:
+          self.applicationData = LazyMap()
+          self.applicationData.read(iprot)
+        else:
+          iprot.skip(ftype)
       else:
         iprot.skip(ftype)
       iprot.readFieldEnd()
@@ -2304,6 +2521,18 @@ class NoteAttributes(object):
     if self.shareDate != None:
       oprot.writeFieldBegin('shareDate', TType.I64, 17)
       oprot.writeI64(self.shareDate)
+      oprot.writeFieldEnd()
+    if self.placeName != None:
+      oprot.writeFieldBegin('placeName', TType.STRING, 21)
+      oprot.writeString(self.placeName)
+      oprot.writeFieldEnd()
+    if self.contentClass != None:
+      oprot.writeFieldBegin('contentClass', TType.STRING, 22)
+      oprot.writeString(self.contentClass)
+      oprot.writeFieldEnd()
+    if self.applicationData != None:
+      oprot.writeFieldBegin('applicationData', TType.STRUCT, 23)
+      self.applicationData.write(oprot)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()
@@ -2570,21 +2799,21 @@ class Note(object):
       elif fid == 12:
         if ftype == TType.LIST:
           self.tagGuids = []
-          (_etype17, _size14) = iprot.readListBegin()
-          for _i18 in xrange(_size14):
-            _elem19 = iprot.readString();
-            self.tagGuids.append(_elem19)
+          (_etype33, _size30) = iprot.readListBegin()
+          for _i34 in xrange(_size30):
+            _elem35 = iprot.readString();
+            self.tagGuids.append(_elem35)
           iprot.readListEnd()
         else:
           iprot.skip(ftype)
       elif fid == 13:
         if ftype == TType.LIST:
           self.resources = []
-          (_etype23, _size20) = iprot.readListBegin()
-          for _i24 in xrange(_size20):
-            _elem25 = Resource()
-            _elem25.read(iprot)
-            self.resources.append(_elem25)
+          (_etype39, _size36) = iprot.readListBegin()
+          for _i40 in xrange(_size36):
+            _elem41 = Resource()
+            _elem41.read(iprot)
+            self.resources.append(_elem41)
           iprot.readListEnd()
         else:
           iprot.skip(ftype)
@@ -2597,10 +2826,10 @@ class Note(object):
       elif fid == 15:
         if ftype == TType.LIST:
           self.tagNames = []
-          (_etype29, _size26) = iprot.readListBegin()
-          for _i30 in xrange(_size26):
-            _elem31 = iprot.readString();
-            self.tagNames.append(_elem31)
+          (_etype45, _size42) = iprot.readListBegin()
+          for _i46 in xrange(_size42):
+            _elem47 = iprot.readString();
+            self.tagNames.append(_elem47)
           iprot.readListEnd()
         else:
           iprot.skip(ftype)
@@ -2661,15 +2890,15 @@ class Note(object):
     if self.tagGuids != None:
       oprot.writeFieldBegin('tagGuids', TType.LIST, 12)
       oprot.writeListBegin(TType.STRING, len(self.tagGuids))
-      for iter32 in self.tagGuids:
-        oprot.writeString(iter32)
+      for iter48 in self.tagGuids:
+        oprot.writeString(iter48)
       oprot.writeListEnd()
       oprot.writeFieldEnd()
     if self.resources != None:
       oprot.writeFieldBegin('resources', TType.LIST, 13)
       oprot.writeListBegin(TType.STRUCT, len(self.resources))
-      for iter33 in self.resources:
-        iter33.write(oprot)
+      for iter49 in self.resources:
+        iter49.write(oprot)
       oprot.writeListEnd()
       oprot.writeFieldEnd()
     if self.attributes != None:
@@ -2679,8 +2908,8 @@ class Note(object):
     if self.tagNames != None:
       oprot.writeFieldBegin('tagNames', TType.LIST, 15)
       oprot.writeListBegin(TType.STRING, len(self.tagNames))
-      for iter34 in self.tagNames:
-        oprot.writeString(iter34)
+      for iter50 in self.tagNames:
+        oprot.writeString(iter50)
       oprot.writeListEnd()
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
@@ -3020,10 +3249,10 @@ class Notebook(object):
       elif fid == 13:
         if ftype == TType.LIST:
           self.sharedNotebookIds = []
-          (_etype38, _size35) = iprot.readListBegin()
-          for _i39 in xrange(_size35):
-            _elem40 = iprot.readI64();
-            self.sharedNotebookIds.append(_elem40)
+          (_etype54, _size51) = iprot.readListBegin()
+          for _i55 in xrange(_size51):
+            _elem56 = iprot.readI64();
+            self.sharedNotebookIds.append(_elem56)
           iprot.readListEnd()
         else:
           iprot.skip(ftype)
@@ -3076,8 +3305,8 @@ class Notebook(object):
     if self.sharedNotebookIds != None:
       oprot.writeFieldBegin('sharedNotebookIds', TType.LIST, 13)
       oprot.writeListBegin(TType.I64, len(self.sharedNotebookIds))
-      for iter41 in self.sharedNotebookIds:
-        oprot.writeI64(iter41)
+      for iter57 in self.sharedNotebookIds:
+        oprot.writeI64(iter57)
       oprot.writeListEnd()
       oprot.writeFieldEnd()
     oprot.writeFieldStop()

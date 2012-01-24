@@ -5,8 +5,13 @@ from django.views.generic import TemplateView
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
+from clevernote import CleverNote
+
+
 def PostEn(request, userId, guid, reason, *args, **kwargs):
     template_name = "evernote/post.hamlpy"
+    
+    import evernote.en
     
     context = {
         "userId": userId,

@@ -624,6 +624,37 @@ class SyncChunkFilter(object):
      are both true, then the SyncChunks.expungedTags field will be set with
      the GUIDs of tags that have been expunged from the server.
      </dd>
+  
+   <dt>includeNoteApplicationDataFullMap</dt>
+     <dd>
+     If true, then the values for the applicationData map will be filled
+     in, assuming notes and note attributes are being returned.  Otherwise,
+     only the keysOnly field will be filled in.
+     </dd>
+  
+   <dt>includeResourceApplicationDataFullMap</dt>
+     <dd>
+     If true, then the fullMap values for the applicationData map will be
+     filled in, assuming resources and resource attributes are being returned
+     (includeResources is true).  Otherwise, only the keysOnly field will be
+     filled in.
+     </dd>
+  
+   <dt>includeNoteResourceApplicationDataFullMap</dt>
+     <dd>
+     If true, then the fullMap values for the applicationData map will be
+     filled in for resources found inside of notes, assuming resources are
+     being returned in notes (includeNoteResources is true).  Otherwise,
+     only the keysOnly field will be filled in.
+     </dd>
+     
+   <dt>requireNoteContentClass</dt>
+     <dd>
+     If set, then only send notes whose content class matches this value.
+     The value can be a literal match or, if the last character is an
+     asterisk, a prefix match.
+     </dd>
+      
    </dl>
   
   Attributes:
@@ -636,6 +667,10 @@ class SyncChunkFilter(object):
    - includeResources
    - includeLinkedNotebooks
    - includeExpunged
+   - includeNoteApplicationDataFullMap
+   - includeResourceApplicationDataFullMap
+   - includeNoteResourceApplicationDataFullMap
+   - requireNoteContentClass
   """
 
   thrift_spec = (
@@ -649,9 +684,13 @@ class SyncChunkFilter(object):
     (7, TType.BOOL, 'includeResources', None, None, ), # 7
     (8, TType.BOOL, 'includeLinkedNotebooks', None, None, ), # 8
     (9, TType.BOOL, 'includeExpunged', None, None, ), # 9
+    (10, TType.BOOL, 'includeNoteApplicationDataFullMap', None, None, ), # 10
+    (11, TType.STRING, 'requireNoteContentClass', None, None, ), # 11
+    (12, TType.BOOL, 'includeResourceApplicationDataFullMap', None, None, ), # 12
+    (13, TType.BOOL, 'includeNoteResourceApplicationDataFullMap', None, None, ), # 13
   )
 
-  def __init__(self, includeNotes=None, includeNoteResources=None, includeNoteAttributes=None, includeNotebooks=None, includeTags=None, includeSearches=None, includeResources=None, includeLinkedNotebooks=None, includeExpunged=None,):
+  def __init__(self, includeNotes=None, includeNoteResources=None, includeNoteAttributes=None, includeNotebooks=None, includeTags=None, includeSearches=None, includeResources=None, includeLinkedNotebooks=None, includeExpunged=None, includeNoteApplicationDataFullMap=None, includeResourceApplicationDataFullMap=None, includeNoteResourceApplicationDataFullMap=None, requireNoteContentClass=None,):
     self.includeNotes = includeNotes
     self.includeNoteResources = includeNoteResources
     self.includeNoteAttributes = includeNoteAttributes
@@ -661,6 +700,10 @@ class SyncChunkFilter(object):
     self.includeResources = includeResources
     self.includeLinkedNotebooks = includeLinkedNotebooks
     self.includeExpunged = includeExpunged
+    self.includeNoteApplicationDataFullMap = includeNoteApplicationDataFullMap
+    self.includeResourceApplicationDataFullMap = includeResourceApplicationDataFullMap
+    self.includeNoteResourceApplicationDataFullMap = includeNoteResourceApplicationDataFullMap
+    self.requireNoteContentClass = requireNoteContentClass
 
   def read(self, iprot):
     if iprot.__class__ == TBinaryProtocol.TBinaryProtocolAccelerated and isinstance(iprot.trans, TTransport.CReadableTransport) and self.thrift_spec is not None and fastbinary is not None:
@@ -716,6 +759,26 @@ class SyncChunkFilter(object):
           self.includeExpunged = iprot.readBool();
         else:
           iprot.skip(ftype)
+      elif fid == 10:
+        if ftype == TType.BOOL:
+          self.includeNoteApplicationDataFullMap = iprot.readBool();
+        else:
+          iprot.skip(ftype)
+      elif fid == 12:
+        if ftype == TType.BOOL:
+          self.includeResourceApplicationDataFullMap = iprot.readBool();
+        else:
+          iprot.skip(ftype)
+      elif fid == 13:
+        if ftype == TType.BOOL:
+          self.includeNoteResourceApplicationDataFullMap = iprot.readBool();
+        else:
+          iprot.skip(ftype)
+      elif fid == 11:
+        if ftype == TType.STRING:
+          self.requireNoteContentClass = iprot.readString();
+        else:
+          iprot.skip(ftype)
       else:
         iprot.skip(ftype)
       iprot.readFieldEnd()
@@ -761,6 +824,22 @@ class SyncChunkFilter(object):
     if self.includeExpunged != None:
       oprot.writeFieldBegin('includeExpunged', TType.BOOL, 9)
       oprot.writeBool(self.includeExpunged)
+      oprot.writeFieldEnd()
+    if self.includeNoteApplicationDataFullMap != None:
+      oprot.writeFieldBegin('includeNoteApplicationDataFullMap', TType.BOOL, 10)
+      oprot.writeBool(self.includeNoteApplicationDataFullMap)
+      oprot.writeFieldEnd()
+    if self.requireNoteContentClass != None:
+      oprot.writeFieldBegin('requireNoteContentClass', TType.STRING, 11)
+      oprot.writeString(self.requireNoteContentClass)
+      oprot.writeFieldEnd()
+    if self.includeResourceApplicationDataFullMap != None:
+      oprot.writeFieldBegin('includeResourceApplicationDataFullMap', TType.BOOL, 12)
+      oprot.writeBool(self.includeResourceApplicationDataFullMap)
+      oprot.writeFieldEnd()
+    if self.includeNoteResourceApplicationDataFullMap != None:
+      oprot.writeFieldBegin('includeNoteResourceApplicationDataFullMap', TType.BOOL, 13)
+      oprot.writeBool(self.includeNoteResourceApplicationDataFullMap)
       oprot.writeFieldEnd()
     oprot.writeFieldStop()
     oprot.writeStructEnd()
@@ -2310,7 +2389,7 @@ class NoteEmailParameters(object):
 
 class NoteVersionId(object):
   """
-  Identfying information about previous versions of a note that are backed up
+  Identifying information about previous versions of a note that are backed up
   within Evernote's servers.  Used in the return value of the listNoteVersions
   call.
   
@@ -2336,7 +2415,7 @@ class NoteVersionId(object):
    </dd>
    <dt>title</dt>
    <dd>
-     The title of the note when this particular verison was saved.  (The
+     The title of the note when this particular version was saved.  (The
      current title of the note may differ from this value.)
    </dd>
   </dl>

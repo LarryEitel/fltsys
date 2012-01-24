@@ -1,9 +1,8 @@
-from django.conf.urls.defaults import patterns, url
+from django.conf.urls.defaults import patterns, include, url
 
-from views import HomeView, PostEn
+from views import *
 
-
-urlpatterns = patterns('views',
+urlpatterns = patterns('',
     #url(r'userId=(?P<userId>\d+)/$', PostEn, name="PostEn"),
     url(r'userId=(?P<userId>\d+)[&\?]guid=(?P<guid>.*?)[&\?]reason=(?P<reason>update|create)/$', PostEn, name="PostEn"),
     #url(r'^userId=(?P<userId>\d+)/$', PostEn, name="PostEn"),

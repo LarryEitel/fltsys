@@ -49,6 +49,10 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
   print '  NotesMetadataList findNotesMetadata(string authenticationToken, NoteFilter filter, i32 offset, i32 maxNotes, NotesMetadataResultSpec resultSpec)'
   print '  NoteCollectionCounts findNoteCounts(string authenticationToken, NoteFilter filter, bool withTrash)'
   print '  Note getNote(string authenticationToken, Guid guid, bool withContent, bool withResourcesData, bool withResourcesRecognition, bool withResourcesAlternateData)'
+  print '  LazyMap getNoteApplicationData(string authenticationToken, Guid guid)'
+  print '  string getNoteApplicationDataEntry(string authenticationToken, Guid guid, string key)'
+  print '  i32 setNoteApplicationDataEntry(string authenticationToken, Guid guid, string key, string value)'
+  print '  i32 unsetNoteApplicationDataEntry(string authenticationToken, Guid guid, string key)'
   print '  string getNoteContent(string authenticationToken, Guid guid)'
   print '  string getNoteSearchText(string authenticationToken, Guid guid, bool noteOnly, bool tokenizeForIndexing)'
   print '  string getResourceSearchText(string authenticationToken, Guid guid)'
@@ -63,6 +67,10 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
   print '   listNoteVersions(string authenticationToken, Guid noteGuid)'
   print '  Note getNoteVersion(string authenticationToken, Guid noteGuid, i32 updateSequenceNum, bool withResourcesData, bool withResourcesRecognition, bool withResourcesAlternateData)'
   print '  Resource getResource(string authenticationToken, Guid guid, bool withData, bool withRecognition, bool withAttributes, bool withAlternateData)'
+  print '  LazyMap getResourceApplicationData(string authenticationToken, Guid guid)'
+  print '  string getResourceApplicationDataEntry(string authenticationToken, Guid guid, string key)'
+  print '  i32 setResourceApplicationDataEntry(string authenticationToken, Guid guid, string key, string value)'
+  print '  i32 unsetResourceApplicationDataEntry(string authenticationToken, Guid guid, string key)'
   print '  i32 updateResource(string authenticationToken, Resource resource)'
   print '  string getResourceData(string authenticationToken, Guid guid)'
   print '  Resource getResourceByHash(string authenticationToken, Guid noteGuid, string contentHash, bool withData, bool withRecognition, bool withAlternateData)'
@@ -74,6 +82,7 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
   print '  Ad getRandomAd(string authenticationToken, AdParameters adParameters)'
   print '  Notebook getPublicNotebook(UserID userId, string publicUri)'
   print '  SharedNotebook createSharedNotebook(string authenticationToken, SharedNotebook sharedNotebook)'
+  print '  i32 sendMessageToSharedNotebookMembers(string authenticationToken, Guid notebookGuid, string messageText,  recipients)'
   print '   listSharedNotebooks(string authenticationToken)'
   print '  i32 expungeSharedNotebooks(string authenticationToken,  sharedNotebookIds)'
   print '  LinkedNotebook createLinkedNotebook(string authenticationToken, LinkedNotebook linkedNotebook)'
@@ -302,6 +311,30 @@ elif cmd == 'getNote':
     sys.exit(1)
   pp.pprint(client.getNote(args[0],eval(args[1]),eval(args[2]),eval(args[3]),eval(args[4]),eval(args[5]),))
 
+elif cmd == 'getNoteApplicationData':
+  if len(args) != 2:
+    print 'getNoteApplicationData requires 2 args'
+    sys.exit(1)
+  pp.pprint(client.getNoteApplicationData(args[0],eval(args[1]),))
+
+elif cmd == 'getNoteApplicationDataEntry':
+  if len(args) != 3:
+    print 'getNoteApplicationDataEntry requires 3 args'
+    sys.exit(1)
+  pp.pprint(client.getNoteApplicationDataEntry(args[0],eval(args[1]),args[2],))
+
+elif cmd == 'setNoteApplicationDataEntry':
+  if len(args) != 4:
+    print 'setNoteApplicationDataEntry requires 4 args'
+    sys.exit(1)
+  pp.pprint(client.setNoteApplicationDataEntry(args[0],eval(args[1]),args[2],args[3],))
+
+elif cmd == 'unsetNoteApplicationDataEntry':
+  if len(args) != 3:
+    print 'unsetNoteApplicationDataEntry requires 3 args'
+    sys.exit(1)
+  pp.pprint(client.unsetNoteApplicationDataEntry(args[0],eval(args[1]),args[2],))
+
 elif cmd == 'getNoteContent':
   if len(args) != 2:
     print 'getNoteContent requires 2 args'
@@ -386,6 +419,30 @@ elif cmd == 'getResource':
     sys.exit(1)
   pp.pprint(client.getResource(args[0],eval(args[1]),eval(args[2]),eval(args[3]),eval(args[4]),eval(args[5]),))
 
+elif cmd == 'getResourceApplicationData':
+  if len(args) != 2:
+    print 'getResourceApplicationData requires 2 args'
+    sys.exit(1)
+  pp.pprint(client.getResourceApplicationData(args[0],eval(args[1]),))
+
+elif cmd == 'getResourceApplicationDataEntry':
+  if len(args) != 3:
+    print 'getResourceApplicationDataEntry requires 3 args'
+    sys.exit(1)
+  pp.pprint(client.getResourceApplicationDataEntry(args[0],eval(args[1]),args[2],))
+
+elif cmd == 'setResourceApplicationDataEntry':
+  if len(args) != 4:
+    print 'setResourceApplicationDataEntry requires 4 args'
+    sys.exit(1)
+  pp.pprint(client.setResourceApplicationDataEntry(args[0],eval(args[1]),args[2],args[3],))
+
+elif cmd == 'unsetResourceApplicationDataEntry':
+  if len(args) != 3:
+    print 'unsetResourceApplicationDataEntry requires 3 args'
+    sys.exit(1)
+  pp.pprint(client.unsetResourceApplicationDataEntry(args[0],eval(args[1]),args[2],))
+
 elif cmd == 'updateResource':
   if len(args) != 2:
     print 'updateResource requires 2 args'
@@ -451,6 +508,12 @@ elif cmd == 'createSharedNotebook':
     print 'createSharedNotebook requires 2 args'
     sys.exit(1)
   pp.pprint(client.createSharedNotebook(args[0],eval(args[1]),))
+
+elif cmd == 'sendMessageToSharedNotebookMembers':
+  if len(args) != 4:
+    print 'sendMessageToSharedNotebookMembers requires 4 args'
+    sys.exit(1)
+  pp.pprint(client.sendMessageToSharedNotebookMembers(args[0],eval(args[1]),args[2],eval(args[3]),))
 
 elif cmd == 'listSharedNotebooks':
   if len(args) != 1:

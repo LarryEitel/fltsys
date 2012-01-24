@@ -4,6 +4,9 @@ import posixpath
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
+# inserting my virtualenv
+sys.path.insert(0, 'C:\\_envs\\flt\\Lib\\site-packages')
+
 DEBUG = False
 #TEMPLATE_DEBUG = DEBUG
 TEMPLATE_DEBUG = True
@@ -168,6 +171,7 @@ INSTALLED_APPS = (
     "world",
     'gunicorn',
     'registration',
+    'en',
 )
 
 #GOOGLE_API_KEY = 'ABQIAAAA7EHoBVg-afV-31BS0PskPxQA_ihIzGih6r-gZzpca5UCE7OJZBRXZIV_rBhC-2hL5RY_qPuF6gVOPA'
@@ -198,6 +202,11 @@ LOGGING = {
     }
 }
 
+EVERNOTE_HOST = "sandbox.evernote.com" 
+EVERNOTE_CONSUMER_KEY = ''
+EVERNOTE_CONSUMER_SECRET = ''
+EVERNOTE_USER = ''
+EVERNOTE_PW = ''
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.

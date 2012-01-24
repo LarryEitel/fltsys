@@ -10,11 +10,16 @@ import evernote.edam.userstore.constants as UserStoreConstants
 import evernote.edam.notestore.NoteStore as NoteStore
 import evernote.edam.type.ttypes as Types
 
+import settings
+
+settings.EN_CONSUMER_KEY
+settings.EN_CONSUMER_SECRET
+
 # YOU MUST FILL THESE IN! GET ACCESS AT: http://www.evernote.com/about/developer/api/
-MY_CONSUMER_KEY = ''
-MY_CONSUMER_SECRET = ''
-MY_USER = ''
-MY_PW = ''
+MY_CONSUMER_KEY = settings.EN_CONSUMER_KEY
+MY_CONSUMER_SECRET = settings.EN_CONSUMER_SECRET
+MY_USER = settings.EN_USER
+MY_PW = settings.EN_PW
 
 # try to overwrite MY_* Constants
 try:

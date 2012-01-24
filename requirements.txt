@@ -12,6 +12,8 @@ django-flatblocks
 
 # had to manually install the following
 #-e git://github.com/yourcelf/olwidget.git#egg=django-olwidget
+#-e git+git://github.com/leehsueh/django-evernote-oauth.git#egg=django-evernote-oauth
+# git clone https://github.com/leehsueh/django-evernote-oauth.git
 django-registration==0.7
 django_compressor
 
