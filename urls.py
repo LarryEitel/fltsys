@@ -11,7 +11,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r"^$", include('home.urls')),
-    url(r"en/", include('en.urls')),
+    url(r"evernote/", include('en.urls')),
     url(AsyncContactView.make_url(), AsyncContactView.as_view(), name='async_contact_view'),
     url(r'contacts/coffee', coffee, name="coffee"),
     url(r'contacts', TemplateView.as_view(template_name="address/contact.html"), name="contact_view"),

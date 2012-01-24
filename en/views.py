@@ -4,14 +4,20 @@ from django.core.urlresolvers import reverse
 from django.views.generic import TemplateView
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-
+from django.http import HttpResponse
+import logging
 from clevernote import CleverNote
+
+logger_debug = logging.getLogger('logview.debug')
+
+def index(request, *args, **kwargs):
+    print request.GET
+    logger_debug.debug(request.META['QUERY_STRING'])
+    return HttpResponse('')
 
 
 def PostEn(request, userId, guid, reason, *args, **kwargs):
     template_name = "evernote/post.hamlpy"
-    
-    import evernote.en
     
     context = {
         "userId": userId,
@@ -26,5 +32,5 @@ def PostEn(request, userId, guid, reason, *args, **kwargs):
 
 
 class HomeView(TemplateView):
-    template_name = "evernote/base.hamlpy"
+    template_name = "en/base.hamlpy"
         
