@@ -1,4 +1,4 @@
-import wingdbstub
+#import wingdbstub
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.views.generic import TemplateView
@@ -11,13 +11,13 @@ from clevernote import CleverNote
 logger_debug = logging.getLogger('logview.debug')
 
 def index(request, *args, **kwargs):
-    print request.GET
+    #print request.GET
     logger_debug.debug(request.META['QUERY_STRING'])
     return HttpResponse('')
 
 
 def PostEn(request, userId, guid, reason, *args, **kwargs):
-    template_name = "evernote/post.hamlpy"
+    template_name = "en/post.hamlpy"
     
     context = {
         "userId": userId,
