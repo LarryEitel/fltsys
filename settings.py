@@ -2,6 +2,7 @@ import os
 import sys
 import posixpath
 import socket
+#os.environ['DJANGO_SETTINGS_MODULE'] = 'flt.settings'
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
@@ -137,6 +138,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'snippetscream.ProfileMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 )
 
@@ -189,6 +191,7 @@ INSTALLED_APPS = (
     'gunicorn',
     'registration',
     'en',
+    #'snippetscream',
 )
 
 #GOOGLE_API_KEY = 'ABQIAAAA7EHoBVg-afV-31BS0PskPxQA_ihIzGih6r-gZzpca5UCE7OJZBRXZIV_rBhC-2hL5RY_qPuF6gVOPA'
