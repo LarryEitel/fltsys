@@ -34,8 +34,12 @@ class ENNote(MyModel):
     def __unicode__(self):
         return self.title
     
-    def Update(self, note, notebookName):
+    def Update(self, note, cn):
         import datetime
+        import re 
+	
+        notebookName = cn.notebookName
+	
         self.enupdated = datetime.datetime.fromtimestamp(note.updated/1000).strftime("%Y-%m-%d %H:%M:%S")
         self.encreated = datetime.datetime.fromtimestamp(note.created/1000).strftime("%Y-%m-%d %H:%M:%S")
         self.guid = note.guid
@@ -52,7 +56,35 @@ class ENNote(MyModel):
             self.altitude = note.attributes.altitude
         if note.attributes.author:
             self.author = note.attributes.author
-    
+	    
+	enml = note.content
+	
+	match = re.search(r'"(?P<googlemaplink>http://maps\.google\.com/maps\?(?P<googlemapquerystring>.*?))"', enml, re.DOTALL | re.IGNORECASE)
+	if match:
+	    googlemap = {}
+	    googlemap['googlemaplink'] = match.group("googlemaplink")
+	    googlemap['googlemapquerystring'] = match.group("googlemapquerystring")
+	    queryparams = {}
+	    for queryparam in googlemap['googlemapquerystring'].split('&amp;amp;'):
+		(param, val) = queryparam.split('=')
+		queryparams[param] = val
+		
+	    googlemap['queryparams'] = queryparams	
+	    
+	    latlong = queryparams['ll'].split(',') if 'll' in queryparams.keys() else None
+	    if latlong:
+		(latitude, longitude) = latlong
+		
+	    self.latitude = float(latitude)
+	    self.longitude = float(longitude)	
+	    
+	    note.attributes.latitude = float(latitude)
+	    note.attributes.longitude = float(longitude)
+	    note.attributes.altitude = 1082.934326 # testing this
+	    
+	    cn.noteStore.updateNote(cn.authToken, note) 
+	    
+        
         self.save()
     
     

@@ -17,7 +17,7 @@ def entruncatepois(args):
 # Load all Territory POI's
 @command
 @argument('howmany', type=int, help="How many notes to sync. 0 for all.")    
-def enloadpois(args):
+def enpoisload(args):
     import datetime
     from clevernote import CleverNote
     
@@ -51,10 +51,13 @@ def enloadpois(args):
 
 
 @command
-def entest(args):
+@argument('howmany', type=int, help="How many notes to list. 0 for all.")   
+def enpoislist(args):
     import datetime
     from clevernote import CleverNote
+    
+    howmany = 0 if args.howmany <= 0 else args.howmany
+    
     cn = CleverNote()
     notebookName = "Territory POIs"
-    
-    print cn.listNotes(notebookName, 10)
+    print cn.listNotes(notebookName, howmany)

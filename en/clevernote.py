@@ -11,6 +11,8 @@ import evernote.edam.error.ttypes as Errors
 import settings
 
 class CleverNote:
+    notebookName = "Territory POIs"  
+    
     def __init__(self):
         username = settings.EVERNOTE_USER
         password = settings.EVERNOTE_PW
@@ -102,7 +104,7 @@ class CleverNote:
         # get total notes
         findNotes = self.noteStore.findNotes(self.authToken, filter, 0, 1)
         totalNotes = findNotes.totalNotes
-        notecount = maxNotes if maxNotes and totalNotes > maxNotes else totalNotes
+        notecount = maxNotes if maxNotes and not maxNotes > totalNotes else totalNotes
         
         notelist = []
         #[noteList.append(note.name) for note in self.notes.getNotes() if note.name.startswith(text)]
@@ -126,13 +128,16 @@ class CleverNote:
             
         return notelist
     
-    def listNotes(self, notebookName, listCount=100000000):
+    def listNotes(self, notebookName, maxNotes = 0):
+        
         loopCount = 0;
-        notelist = self.getAllNotes(notebookName)
-        for note in notelist.notes:
+        notelist = self.getAllNotes(notebookName, maxNotes)
+        for note in notelist:
             #assert(note,Types.Note)
             dt = datetime.datetime.fromtimestamp(note.updated/1000)
-            printString = dt.strftime("%Y-%m-%d %H:%M:%S")
+            printString = note.guid
+            printString += ' '
+            printString += dt.strftime("%Y-%m-%d %H:%M:%S")
             tags = note.tagNames
             printString += note.title
             if tags:
@@ -146,5 +151,5 @@ class CleverNote:
                 printString = printString[:-2] + ")"
             print printString
             loopCount += 1
-            if loopCount == listCount:
+            if loopCount == maxNotes:
                 break            
