@@ -1,13 +1,45 @@
 # https://github.com/zacharyvoase/django-boss
 # http://docs.python.org/dev/library/argparse.html
 from djboss.commands import *
-from models import ENNote
-# a copy of this file should be copied to djboss app dir
-import wingdbstub
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
 
+# a copy of this file should be copied to djboss app dir
+#import wingdbstub
+
+
+@command
+def enpoiparseall(args):
+    """Parse all map coords, authors, etc for unparsed notes"""
+    
+    from models import ENNote
+    for note in ENNote.objects.all():
+        #note.ParseDetails()
+        note.save()
+        print note.id, note.title
+
+@command
+def enparsedetails(args):
+    from models import ENNote
+    note = ENNote.objects.get(id=275)
+    note.ParseDetails()
+    note.save()
+    x=0
+
+
+@command
+def enprnpubs(args):
+    """Print Publisher initials and names from '__Publish Name and Initials'"""
+    from note import getpubs
+    pubs = getpubs()
+    pp.pprint(pubs)
+    
+    
+    
 @command
 def entruncatepois(args):
     from django.db import connection
+    from models import ENNote
     
     # TRUNCATE Existing rows
     cursor = connection.cursor()
@@ -20,6 +52,7 @@ def entruncatepois(args):
 def enpoisload(args):
     import datetime
     from clevernote import CleverNote
+    from models import ENNote
     
     howmany = 0 if args.howmany <= 0 else args.howmany
     
@@ -40,7 +73,7 @@ def enpoisload(args):
         withResourcesAlternateData = False
         notefull = cn.noteStore.getNote(cn.authToken, note.guid, withContent, withResourcesData, withResourcesRecognition, withResourcesAlternateData)        
         
-        en.Update(notefull, notebookName)
+        en.UpdateFromEN(notefull, notebookName)
         print "Added:", en.guid, en.title
         
         notecount += 1

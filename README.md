@@ -42,3 +42,5 @@
 # ACKNOWLEDGEMENTS
 
 This project has been put together with a ton of help from a lot of people.
+
+# LICENSE: GPL

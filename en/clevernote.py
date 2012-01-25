@@ -93,6 +93,11 @@ class CleverNote:
         #notelist.notes[0].content = self.noteStore.getNoteContent(self.authToken, notelist.notes[0].guid)
         #return notelist.notes[0]
             
+
+    def parseNoteContentToMarkDown(self, content):    
+        txt = html2text.html2text(content.decode('us-ascii','ignore'))
+        return txt.decode('utf-8','replace')
+    
     def getAllNotes(self, notebookName, maxNotes = 0):
         notebooks = self.noteStore.listNotebooks(self.authToken)
         notebook = [nb for nb in notebooks if nb.name == notebookName][0]

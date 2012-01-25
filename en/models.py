@@ -1,4 +1,5 @@
-from django.contrib.gis.db import models
+#from django.contrib.gis.db import models
+from django.db import models
 from django.contrib.auth.models import User
 from current_user import registration
 from django_extensions.db.models import TimeStampedModel
@@ -12,14 +13,15 @@ class ENNote(MyModel):
     modifier = CurrentUserField(blank=True, related_name = "flt_evernote_modifier", default=1)
     
     
-    active = models.BooleanField("Active?") 
+    active = models.BooleanField("Active?", default=False) 
+    geocoded = models.BooleanField("GeoCoded?", default=False) 
     guid = models.CharField("GUID", max_length=64, db_index=True)   
     notebookGuid = models.CharField("Notebook GUID", max_length=64)   
     notebookName = models.CharField("Notebook Name", max_length=64)   
     
    
     
-    ll = models.PointField("LongLat", default='POINT(-84.145393330458063 9.9789556383996896)')
+    #ll = models.PointField("LongLat", default='POINT(-84.145393330458063 9.9789556383996896)')
     latitude = models.FloatField("Latitude", null=True, blank=True)
     longitude = models.FloatField("Longitude", null=True, blank=True)
     altitude = models.FloatField("Altitude", null=True, blank=True)
@@ -29,12 +31,40 @@ class ENNote(MyModel):
     enupdated = models.DateTimeField("EN Updated", null=True, blank=True)
     endeleted = models.DateTimeField("EN Deleted", null=True, blank=True)
     updateSequenceNum = models.IntegerField("Style ID", null=True, blank=True)
-    objects = models.GeoManager()
+    #objects = models.GeoManager()
 
+    
+    
     def __unicode__(self):
         return self.title
     
-    def Update(self, note, cn):
+    def ParseDetails(self):
+	import re
+	import html2text # pip install html2text
+	
+	enml = self.content
+	#contenttxt = html2text.html2text(enml.decode('us-ascii','ignore')).decode('utf-8','replace')
+	contenttxt = enml
+	
+	# look for ll=9.999107,-84.106216 like string for lat/long
+	reobj = re.compile(r"[&;]ll=(?P<latitude>[\-0-9.]+),(?P<longitude>[\-0-9.]+)")
+	match = reobj.search(contenttxt)
+	if match:
+	    self.latitude = float(match.group("latitude"))
+	    self.longitude = float(match.group("longitude"))
+	    
+	# look for _LWE like string for author
+	# set author based on initials if possible
+	reobj = re.compile(r"(^|\s|>)_?(?P<initials>[A-Z]{3})\s")
+	match = reobj.search(contenttxt)
+	if match:
+	    initials = match.group("initials")
+	    from note import getpubs
+	    pubs = getpubs()
+	    if initials in pubs:
+		self.author = pubs[initials] + (" (_%s)" % initials)
+	
+    def UpdateFromEN(self, note, cn):
         import datetime
         import re 
 	
@@ -57,39 +87,18 @@ class ENNote(MyModel):
         if note.attributes.author:
             self.author = note.attributes.author
 	    
-	enml = note.content
 	
-	match = re.search(r'"(?P<googlemaplink>http://maps\.google\.com/maps\?(?P<googlemapquerystring>.*?))"', enml, re.DOTALL | re.IGNORECASE)
-	if match:
-	    googlemap = {}
-	    googlemap['googlemaplink'] = match.group("googlemaplink")
-	    googlemap['googlemapquerystring'] = match.group("googlemapquerystring")
-	    queryparams = {}
-	    for queryparam in googlemap['googlemapquerystring'].split('&amp;amp;'):
-		(param, val) = queryparam.split('=')
-		queryparams[param] = val
-		
-	    googlemap['queryparams'] = queryparams	
-	    
-	    latlong = queryparams['ll'].split(',') if 'll' in queryparams.keys() else None
-	    if latlong:
-		(latitude, longitude) = latlong
-		
-	    self.latitude = float(latitude)
-	    self.longitude = float(longitude)	
-	    
-	    note.attributes.latitude = float(latitude)
-	    note.attributes.longitude = float(longitude)
-	    note.attributes.altitude = 1082.934326 # testing this
-	    
-	    cn.noteStore.updateNote(cn.authToken, note) 
-	    
+	self.ParseDetails()
         
         self.save()
-    
-    
     
     class Meta:
         #app_label = u'flt_evernote'
         db_table = u'flt_evernote'        
         
+    
+    def save(self, *args, **kw):
+	self.geocoded = True if (self.latitude and self.longitude) else False
+        super(ENNote, self).save(*args, **kw)
+        
+    
