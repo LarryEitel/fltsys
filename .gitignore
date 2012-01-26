@@ -2,8 +2,8 @@
 *.pyo
 *.db
 *.log
-*.DS_Store
-bin
+ve
+build
 lib
 include
 Lib

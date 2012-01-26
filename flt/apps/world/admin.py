@@ -1,5 +1,5 @@
 ﻿from django.contrib.gis import admin
-from flt.apps.olwidget.admin import GeoModelAdmin
+from olwidget.admin import GeoModelAdmin
 from flt.apps.world.models import WorldBorder
 
 # Customize the map

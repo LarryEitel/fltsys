@@ -14,19 +14,13 @@ if socket.gethostname() in PRODUCTION_SERVERS:
     sys.path.append(PROJECT_ROOT)
 else:
     PRODUCTION = False
-    VENV_ROOT = os.path.join( 'c:\\_envs', 'flt')
-    sys.path = []
-    sys.path.append(PROJECT_ROOT)
-    sys.path.append(VENV_ROOT)    
-    sys.path.append(os.path.join( VENV_ROOT, 'lib'))   
-    sys.path.append(os.path.join( VENV_ROOT, 'lib', 'site-packages')) 
-    sys.path.append('c:\\python27')  
-    sys.path.append(os.path.join('c:\\python27', 'lib'))
-    sys.path.append(os.path.join('c:\\python27', 'lib', 'site-packages'))
-#c:\python27\lib\site-packages\django\contrib\gis\geos\geometry
+    VENV_ROOT = '../ve'
+    
+##c:\python27\lib\site-packages\django\contrib\gis\geos\geometry
 
 DEBUG = not PRODUCTION
-TEMPLATE_DEBUG = DEBUG
+#TEMPLATE_DEBUG = DEBUG
+TEMPLATE_DEBUG = True
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -177,7 +171,7 @@ INSTALLED_APPS = (
     #'coffeescript',
     'compressor',
     "flatblocks",
-    'olwidget',
+    #'olwidget',
     'tastypie',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',

@@ -1,21 +1,27 @@
 Django==1.3.1
-mimeparse>=0.1.3
-python-dateutil==1
-django-tastypie==0.9.11
-pystache==0.3.1
+mimeparse
+python-dateutil
+django-tastypie
+pystache
 
 ctypes
+djaml
+hamlpy
 django-extensions
 django-coffeescript
 django-debug-toolbar
 django-boss
 django-flatblocks
 django-snippetscream
-
+django-staticfiles
+html2text
 # had to manually install the following
 #-e git://github.com/yourcelf/olwidget.git#egg=django-olwidget
+
 #-e git+git://github.com/leehsueh/django-evernote-oauth.git#egg=django-evernote-oauth
+
 # git clone https://github.com/leehsueh/django-evernote-oauth.git
+
 django-registration==0.7
 django_compressor
 
@@ -30,6 +36,6 @@ django_compressor
 
 
 # Had to manually work and save this in project
-#django-olwidget
-#mysql-python
+django-olwidget
+mysql-python
 gunicorn

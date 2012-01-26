@@ -1,5 +1,5 @@
 from django.contrib.gis import admin
-from flt.apps.olwidget.admin import GeoModelAdmin
+from olwidget.admin import GeoModelAdmin
 from flt.apps.boundaries.models import Boundary, BoundaryType, BoundariesRelated
 
 # Customize the map
