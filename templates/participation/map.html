@@ -1,0 +1,91 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% load participation_tags %}
+
+{% block head_title %}Explore our map{% endblock %}
+
+{% block extra_head_js %}{% include "_map_scripts.html" %}{% endblock %}
+
+{% block body %}
+<h2>Explore our map!</h2>
+<p>Here you can explore every item that has been located and shared on Interactive Somerville. Please use the drop-down lists beneath the map to filter shared items shown on the map.</p>
+<div class="map_container"><div id="map" class="map16"></div></div>
+
+<div class="map_filter">
+	<p><strong>Filter items on map by:</strong>
+	<select id="select-station">
+		<option value="" selected="selected">-- Related Station --</option>
+		{% for station in stations %}<option value="{{ station.id }}">{{ station.name }}</option>{% endfor %}
+	</select>
+	<select id="select-theme">
+		<option value="" selected="selected">-- Related Theme --</option>
+		{% for theme in themes %}<option value="{{ theme.id }}">{{ theme.title }}</option>{% endfor %}
+	</select>
+	<select id="select-itemtype">
+		<option value="" selected="selected">-- Type --</option>
+		{% for k, v in itemtypes %}<option value="{{ k }}">{{ v }}</option>{% endfor %}
+	</select></p>
+</div>
+
+{% endblock %}
+
+{% block extra_body %}
+<script type="text/javascript">
+		
+	$(document).ready(function(){
+		
+		// media url
+		greenline.static_url = '{{ STATIC_URL }}';
+		
+		// basemap
+		greenline.createBasemap('map');
+		
+		// zoom and center
+		greenline.map.setOptions({
+			zoom: 13,
+			center: new google.maps.LatLng(42.397, -71.11)
+		});
+		
+		// add station markers
+		{% for station in stations %}
+		greenline.createStationMarker({
+			'title': '{{ station.name }}',
+			'lat': {{ station.geometry.y }},
+			'lon': {{ station.geometry.x }},
+			'desc': '{{ station.desc|truncatewords:30 }}',
+			'url': '{{ station.get_absolute_url }}'
+		});
+		{% endfor %}
+		// add greenline
+		{% for line in lines %}
+		greenline.createGreenline({
+			'points': '{{ line.encoded.points|fixbackslash }}',
+			'levels': '{{ line.encoded.levels }}',
+			'zoomFactor': {{ line.encoded.zoomFactor }},
+			'numLevels': {{ line.encoded.numLevels }}
+		})
+		{% endfor %}
+		
+		// add drag and zoom event listeners to map
+		google.maps.event.addListener(greenline.map, 'dragend', function() {
+			greenline.explore.loadItems();
+		});
+		google.maps.event.addListener(greenline.map, 'zoom_changed', function() {
+			greenline.explore.loadItems();
+		});
+		// initialize explore items
+		google.maps.event.addListenerOnce(greenline.map, 'idle', function(){
+			// triggered only the first time the map is loaded
+			greenline.explore.loadItems();
+		});
+		
+		// map filter
+		$(".map_filter select").change(function() {
+			greenline.explore.loadItems();
+		});
+	});
+
+</script>
+{% endblock %}

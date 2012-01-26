@@ -1,0 +1,57 @@
+{% load i18n ifsetting_tag account_tags %}
+{% load participation_tags %}
+{% load meta_tags %}
+{% load static %}
+
+<div class="topbar" data-dropdown="dropdown">
+  <div class="topbar-inner">
+    <div class="container">
+      <a href="/" title="Interactive Somerville" class="logo"><img src="{% get_static_prefix %}img/logo_small.png" alt="Interactive Somerville" width="90" height="35" /></a>
+      <ul class="nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle">Station Areas</a>
+          <ul class="dropdown-menu">
+          {% for station in stations  %}
+            <li><a href="{{ station.get_absolute_url }}">{{ station.name }}</a></li>
+          {% endfor %}
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle">Themes</a>
+          <ul class="dropdown-menu">
+          {% for theme in themes  %}
+            <li><a href="{{ theme.get_absolute_url }}">{{ theme.title }}</a></li>
+          {% endfor %}
+          </ul>
+        </li>
+        {% page_links 't' %}
+        <li><a href="{% url share %}"><strong>Share something!</strong></a></li>
+      </ul>
+      <ul class="nav secondary-nav">
+      {% if user.is_authenticated %}
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle">{% user_display user %}</a>
+          <ul class="dropdown-menu">
+            <li><a href="{% url profile_detail user.username %}">{% trans "Your Profile" %}</a></li>
+            <li><a href="{% url profile_list %}">{% trans "The Community" %}</a></li>
+            
+            {% if user.is_staff %}<li><a href="{% url admin:index %}">{% trans "Admin" %}</a></li>{% endif %}
+            <li><a href="{% url acct_logout %}">{% trans "Logout" %}</a></li>
+          </ul>
+        </li>
+      {% else %}
+        <li>{% url acct_login as acct_login_url %}</li>
+        <li></li>{% url acct_signup as acct_signup_url %}
+      {% ifsetting ACCOUNT_OPEN_SIGNUP %}
+            {% blocktrans with request.path as request_path %}<li><a href="{{ acct_login_url }}?next={{ request_path }}">Log in</a></li>
+            <li><a href="{{ acct_signup_url }}">Sign up</a></li>{% endblocktrans %}
+      {% else %}
+            {% blocktrans with request.path as request_path %}<li><a href="{{ acct_login_url }}?next={{ request_path }}">Log in</a></li>{% endblocktrans %}
+      {% endifsetting %}
+    {% endif %}
+    </ul>
+    </div>
+  </div>
+</div>
+
+

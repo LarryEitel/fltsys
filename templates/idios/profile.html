@@ -1,0 +1,107 @@
+{% extends "idios/base.html" %}
+
+{% load participation_tags %}
+{% load pagination_tags %}
+{% load i18n %}
+{% load uni_form_tags %}
+{% load account_tags %}
+
+{% block head_title %}{% user_display page_user as page_user_display %}{% blocktrans %}Profile for {{ page_user_display }}{% endblocktrans %}{% endblock %}
+
+{% block extra_head_js %}{% include "_map_scripts.html" %}{% endblock %}
+
+{% block body %}
+    {% user_display page_user as page_user_display %}
+    
+    <h2>{% blocktrans %}Profile for {{ page_user_display }}{% endblocktrans %}</h2>
+   {% if is_me %}
+	<ul class="unstyled">
+		<li><span class="meta"><a href="{% url profile_edit %}">Edit my profile</a></span></li>
+		<li><span class="meta"><a href="{% url acct_email %}">{% trans "Edit my email addresses" %}</a></span></li>
+	</ul>
+	{% endif %}
+		
+	{% include "profiles/_profile_info.html" %}
+
+	{% if profile.mystation %}<h3>My Station Area: {{ profile.mystation }}</h3>{% endif %}
+
+	<div class="row">
+		<div class="span10">
+      		<div class="map_container"><div id="map" class="map10"></div></div>
+      	</div>
+	    <div id="activity-stream" class="span6">
+			<h3>Recently shared:</h3>
+			{% with activities=profile.get_activities %}
+			<ul class="activitystream">
+			{% autopaginate activities 7 %}
+			{% for activity in activities %}
+			{% get_activity activity %}
+			{% endfor %}
+			{% paginate %}
+			</ul>
+			{% endwith %}
+		</div>
+	</div>
+{% endblock %}
+
+{% block extra_body %}
+	<script type="text/javascript">
+		
+		$(document).ready(function(){
+
+			// media url
+			greenline.static_url = '{{ STATIC_URL }}';
+
+			// basemap
+			greenline.createBasemap('map');
+
+			{% if profile.mystation %}
+			// add station markers
+			greenline.createStationMarker({
+				'title': '{{ profile.mystation.name }}',
+				'lat': {{ profile.mystation.geometry.y }},
+				'lon': {{ profile.mystation.geometry.x }},
+				'desc': '{{ profile.mystation.desc|truncatewords:30 }}',
+				'url': '{{ profile.mystation.get_absolute_url }}'
+			});
+			// zoom and center
+			greenline.map.setOptions({
+				zoom: 15,
+				center: new google.maps.LatLng({{ profile.mystation.geometry.y }},{{ profile.mystation.geometry.x }})
+			});
+			{% else %}
+			// zoom and center
+      		greenline.map.setOptions({
+        		zoom: 13,
+        		center: new google.maps.LatLng(42.395, -71.11)
+      		});
+			{% endif %}
+
+			// add greenline
+			{% for line in lines %}
+			greenline.createGreenline({
+				'points': '{{ line.encoded.points|fixbackslash }}',
+				'levels': '{{ line.encoded.levels }}',
+				'zoomFactor': {{ line.encoded.zoomFactor }},
+				'numLevels': {{ line.encoded.numLevels }}
+			})
+			{% endfor %}
+
+			// add activities to map
+			for (var key in greenline.activities) {
+				var activity = greenline.activities[key];
+				var activity_marker = new google.maps.Marker({
+					position: new google.maps.LatLng(activity['lat'], activity['lon']), 
+					map: greenline.map,
+					title: activity['title'],
+					shadow: greenline.icons['shadow'],
+					icon: greenline.icons[activity.itemtype],
+					zIndex: 1
+				});
+				greenline.createInfoBubble('activity', activity_marker, '<div class="infobubble"><span class="title">' + activity['title'] + '</span><p>' + activity['desc'] + '<br><a href="' + activity['url'] + '">Join the discussion!</a></p></div>');
+			}
+
+		});
+		
+	</script>
+{% endblock %}

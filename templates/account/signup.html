@@ -1,0 +1,51 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load uni_form_tags %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="span8 offset4">
+
+    <h1>{% trans "Sign Up" %}</h1>
+    
+    {% if user.is_authenticated %}
+        <p>{% trans "You are already logged in." %}</p>
+    {% else %}
+        <p>{% trans "Already have an account?" %} <a href="{% url acct_login %}">{% trans "Log In" %}</a>!</p>
+        
+        <form class="signup uniForm" id="signup_form" method="post" action="{% url acct_signup %}" autocapitalize="off">
+            {% csrf_token %}
+            {{ form|as_uni_form }}
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            <div class="clearfix">
+                <label></label>
+                <div class="input">
+                    <button class="btn primary">{% trans "Sign Up &raquo;" %}</button>
+                </div>
+            </div>
+        </form>
+        
+        <p>{% blocktrans %}By clicking "Sign Up", you are indicating that you have read and agree to the <a href="/meta/terms-of-use/">Terms of Use</a> and <a href="/meta/privacy-policy/">Privacy Policy</a>.{% endblocktrans %}</p>
+        
+        <p>{% blocktrans %}If you have any trouble creating your account, contact us at <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.{% endblocktrans %}</p>
+        
+    {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_body %}
+<script type="text/javascript" src="{{ STATIC_URL }}css/bootstrap/js/bootstrap-alerts.js"></script>
+<script>
+    $("#id_username").focus();
+    $(".alert-message").alert()
+</script>
+{% endblock %}

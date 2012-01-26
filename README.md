@@ -15,29 +15,9 @@
 * django
 * geodjango
 * geos
-* tastypie
 * google maps
-* backbone.js
-* coffee.script
 * jquery
-* underscore
 
-# INSTALLATION
-
-## Windows
-
-* easy_install -U pip
-* pip install -U virtualenv
-* mkdir /_envs
-* cd /_envs
-* virtualenv --no-site-packages flt
-* /_envs/flt/Scripts/activate.bat
-* pip install -r requirements.txt
-* cd /_flt
-* pip install django-evernote-oauth
-* mv django-evernote-oauth evernote_oauth
-* python manage.py syncdb
-* python manage.py runserver
 
 # ACKNOWLEDGEMENTS
 

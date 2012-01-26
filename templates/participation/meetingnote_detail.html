@@ -1,0 +1,131 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% load participation_tags %}
+{% load comments %}
+{% load account_tags %}
+
+{% block head_title %}Meeting Note #{{ meetingnote.id }}{% endblock %}
+
+{% if meetingnote.geometry or meetingnote.station %}
+{% block extra_head_js %}{% include "_map_scripts.html" %}{% endblock %}
+{% endif %}
+
+{% block body %}
+<div class="row">
+	<div class="span-two-thirds">
+		<h2>Meeting Note</h2>
+
+		{% if meetingnote.meeting_date %}<h5>For meeting held on {{ meetingnote.meeting_date }}</h5>{% endif %}
+		
+		{{ meetingnote.desc_as_html }}
+		
+		{% if meetingnote.note_file or meetingnote.note_url %}<h5>Downloads:</h5>
+		<ul>
+			{% if meetingnote.note_file %}<li><a href="{{ meetingnote.note_file.url }}">{{ meetingnote.note_file.name|slice:"13:" }}</a></li>{% endif %}
+			{% if meetingnote.note_url %}<li><a href="{{ meetingnote.note_url }}">{{ meetingnote.note_url }}</a></li>{% endif %}
+		</ul>{% endif %}
+		
+		<div class="meta">Shared by <a class="author" href="{{ meetingnote.author.get_absolute_url }}">{% firstof meetingnote.author.get_profile.name meetingnote.author.username %}</a> on <span class="timestamp">{{ meetingnote.last_modified|date:"F jS Y" }}</span></div>
+
+		<div id="rating-container">
+			<div id="rating-title">Rating:</div><span id="rating"></span>
+			<div><span class="help-block">
+			{% if user.is_authenticated %}
+				Hover and click to submit your rating.
+			{% else %}
+				{% url acct_login as acct_login_url %}
+		    	{% url acct_signup as acct_signup_url %}
+				{% blocktrans with request.path as request_path %}Please <a href="{{ acct_login_url }}?next={{ request_path }}">Log in</a> or <a href="{{ acct_signup_url }}">Sign Up</a> to submit your rating.{% endblocktrans %}
+			{% endif %}
+			</span></div>
+		</div>
+
+		{% get_comment_count for meetingnote as comment_count %}
+		{% if comment_count > 0 %}
+			{% render_comment_list for meetingnote %}
+			<h4>Post a new comment:</h4>
+		{% else %}
+			<ul class="comments unstyled"></ul>
+			<h4>Be the first to post a comment:</h4>	
+		{% endif %}
+		{% render_comment_form for meetingnote %}
+	</div>
+	<div class="span-one-third">
+		{% if meetingnote.geometry or meetingnote.station %}<div class="map_container"><div id="map" class="maponethird"></div></div>{% endif %}
+		{% if meetingnote.station or meetingnote.theme %}<h5>This Meeting Note relates to</h5>{% endif %}
+		{% if meetingnote.station %}<div>Station Area: <a href="{{ meetingnote.station.get_absolute_url }}">{{ meetingnote.station.name }}</a></div>{% endif %}
+		{% if meetingnote.theme %}<div>Theme: <a href="{{ meetingnote.theme.get_absolute_url }}">{{ meetingnote.theme.title }}</a></div>{% endif %}
+	</div>	
+</div>
+{% endblock %}
+
+{% block extra_body %}
+
+<script type="text/javascript" src="{{ STATIC_URL }}css/bootstrap/js/bootstrap-twipsy.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.raty.min.js"type="text/javascript"></script>
+<script src="{{ STATIC_URL }}js/utils.js" type="text/javascript"></script>
+{% if meetingnote.geometry or meetingnote.station %}
+<script type="text/javascript">
+		
+	$(document).ready(function(){
+		
+		// media url
+		greenline.static_url = '{{ STATIC_URL }}';
+		
+		// basemap
+		greenline.createBasemap('map');
+		
+		{% if meetingnote.geometry %}
+		var meetingnote_ll = new google.maps.LatLng({{ meetingnote.geometry.y }},{{ meetingnote.geometry.x }});
+		var meetingnote = new google.maps.Marker({
+			position: meetingnote_ll, 
+			map: greenline.map,
+			title: "Meeting Note Location",
+			shadow: greenline.icons['shadow'],
+			icon: greenline.icons['m'],
+			zIndex: 1
+		});
+		{% endif %}
+		
+		// add station marker
+		{% if meetingnote.station %}
+		greenline.createStationMarker({
+			'title': '{{ meetingnote.station.name }}',
+			'lat': {{ meetingnote.station.geometry.y }},
+			'lon': {{ meetingnote.station.geometry.x }},
+			'desc': '{{ meetingnote.station.desc|truncatewords:30 }}',
+			'url': '{{ meetingnote.station.get_absolute_url }}'
+		});
+		{% endif %}
+		// add greenline
+		{% for line in lines %}
+		greenline.createGreenline({
+			'points': '{{ line.encoded.points|fixbackslash }}',
+			'levels': '{{ line.encoded.levels }}',
+			'zoomFactor': {{ line.encoded.zoomFactor }},
+			'numLevels': {{ line.encoded.numLevels }}
+		})
+		{% endfor %}
+		
+		// zoom and center
+		greenline.map.setOptions({
+			zoom: 15,
+			center: {% if meetingnote.geometry %}meetingnote_ll{% else %}new google.maps.LatLng({{ meetingnote.station.geometry.y }},{{ meetingnote.station.geometry.x }}){% endif %}
+		});
+
+		// init_rating parameters: (start_score, readonly img_path, item_id)
+		var readonly = {% if user.is_authenticated %}false{% else %}true{% endif %};
+		init_rating({{ rating|default:"0" }}, readonly, '{{ STATIC_URL }}/img', {{ meetingnote.id }});
+
+		// tooltip
+		$(".rating").twipsy();
+
+		// fix textarea with FIXME: add  textarea class in uni_form template
+		$("textarea").addClass('xxlarge');
+	});
+		
+</script>
+{% endif %}
+{% endblock %}

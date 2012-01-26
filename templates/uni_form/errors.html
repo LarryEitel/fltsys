@@ -1,0 +1,9 @@
+{% if form.non_field_errors %}
+<div class="alert-message block-message error fade in">
+    <a class="close" href="#">×</a>
+    <p><strong>Oh snap!</strong></p>
+    <ul>
+    	{{ form.non_field_errors|unordered_list }}
+ 	</ul>
+</div>
+{% endif %}

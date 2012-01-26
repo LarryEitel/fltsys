@@ -1,0 +1,24 @@
+# project.txt is a pip requirements file which describes the distributions
+# required by your project to run.
+
+--requirement=base.txt
+
+# Put project-specific requirements here.
+# See http://pip-installer.org/requirement-format.html for more information.
+
+BeautifulSoup==3.2.0
+PIL==1.1.7
+GPolyEncode==0.1.1
+
+#psycopg2==2.4.2
+#mysql-python
+
+South==0.7.3
+django-model-utils==1.0.0
+Markdown==2.0.3
+textile==2.1.5
+docutils==0.7
+mercurial==1.8
+wsgiref==0.1.2
+-e git://github.com/worldcompany/djangoembed.git#egg=djangoembed
+django-ratings==0.3.6

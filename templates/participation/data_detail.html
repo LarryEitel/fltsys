@@ -1,0 +1,130 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% load participation_tags %}
+{% load comments %}
+{% load account_tags %}
+
+{% block head_title %}Data entry #{{ data.id }}{% endblock %}
+
+{% if data.geometry or data.station %}
+{% block extra_head_js %}{% include "_map_scripts.html" %}{% endblock %}
+{% endif %}
+
+{% block body %}
+<div class="row">
+	<div class="span-two-thirds">
+		<h2>Data</h2>
+
+		{{ data.desc_as_html }}
+
+		{% if data.data_file or data.data_url %}<h5>Downloads:</h5>
+		<ul>
+			{% if data.data_file %}<li><a href="{{ data.data_file.url }}">{{ data.data_file.name|slice:"5:" }}</a></li>{% endif %}
+			{% if data.data_url %}<li><a href="{{ data.data_url }}">{{ data.data_url }}</a></li>{% endif %}
+		</ul>{% endif %}
+
+		<div class="meta">Shared by <a class="author" href="{{ data.author.get_absolute_url }}">{% firstof data.author.get_profile.name data.author.username %}</a> on <span class="timestamp">{{ data.last_modified|date:"F jS Y" }}</span></div>
+
+		<div id="rating-container">
+			<div id="rating-title">Rating:</div><span id="rating"></span>
+			<div><span class="help-block">
+			{% if user.is_authenticated %}
+				Hover and click to submit your rating.
+			{% else %}
+				{% url acct_login as acct_login_url %}
+		    	{% url acct_signup as acct_signup_url %}
+				{% blocktrans with request.path as request_path %}Please <a href="{{ acct_login_url }}?next={{ request_path }}">Log in</a> or <a href="{{ acct_signup_url }}">Sign Up</a> to submit your rating.{% endblocktrans %}
+			{% endif %}
+			</span></div>
+		</div>
+
+		{% get_comment_count for data as comment_count %}
+		{% if comment_count > 0 %}
+			{% render_comment_list for data %}
+			<h4>Post a new comment:</h4>
+		{% else %}
+			<ul class="comments unstyled"></ul>
+			<h4>Be the first to post a comment:</h4>	
+		{% endif %}
+		{% render_comment_form for data %}
+	
+	</div>
+
+	<div class="span-one-third">
+		{% if data.geometry or data.station %}<div class="map_container"><div id="map" class="maponethird"></div></div>{% endif %}
+		{% if data.station or data.theme %}<h5>This Data entry relates to</h5>{% endif %}
+		{% if data.station %}<div>Station Area: <a href="{{ data.station.get_absolute_url }}">{{ data.station.name }}</a></div>{% endif %}
+		{% if data.theme %}<div>Theme: <a href="{{ data.theme.get_absolute_url }}">{{ data.theme.title }}</a></div>{% endif %}
+	</div>
+</div>
+{% endblock %}
+
+{% block extra_body %}
+<script type="text/javascript" src="{{ STATIC_URL }}css/bootstrap/js/bootstrap-twipsy.js"></script>
+<script src="{{ STATIC_URL }}js/jquery.raty.min.js"type="text/javascript"></script>
+<script src="{{ STATIC_URL }}js/utils.js" type="text/javascript"></script>
+{% if data.geometry or data.station %}
+<script type="text/javascript">
+		
+	$(document).ready(function(){
+		
+		// media url
+		greenline.static_url = '{{ STATIC_URL }}';
+		
+		// basemap
+		greenline.createBasemap('map');
+		
+		{% if data.geometry %}
+		var data_ll = new google.maps.LatLng({{ data.geometry.y }},{{ data.geometry.x }});
+		var data = new google.maps.Marker({
+			position: data_ll, 
+			map: greenline.map,
+			title: "Data Location",
+			shadow: greenline.icons['shadow'],
+			icon: greenline.icons['d'],
+			zIndex: 1
+		});
+		{% endif %}
+		
+		// add station marker
+		{% if data.station %}
+		greenline.createStationMarker({
+			'title': '{{ data.station.name }}',
+			'lat': {{ data.station.geometry.y }},
+			'lon': {{ data.station.geometry.x }},
+			'desc': '{{ data.station.desc|truncatewords:30 }}',
+			'url': '{{ data.station.get_absolute_url }}'
+		});
+		{% endif %}
+		// add greenline
+		{% for line in lines %}
+		greenline.createGreenline({
+			'points': '{{ line.encoded.points|fixbackslash }}',
+			'levels': '{{ line.encoded.levels }}',
+			'zoomFactor': {{ line.encoded.zoomFactor }},
+			'numLevels': {{ line.encoded.numLevels }}
+		})
+		{% endfor %}
+		
+		// zoom and center
+		greenline.map.setOptions({
+			zoom: 15,
+			center: {% if data.geometry %}data_ll{% else %}new google.maps.LatLng({{ data.station.geometry.y }},{{ data.station.geometry.x }}){% endif %}
+		});
+		
+		// init_rating parameters: (start_score, readonly img_path, item_id)
+		var readonly = {% if user.is_authenticated %}false{% else %}true{% endif %};
+		init_rating({{ rating|default:"0" }}, readonly, '{{ STATIC_URL }}/img', {{ data.id }});
+
+		// tooltip
+		$(".rating").twipsy();
+
+		// fix textarea with FIXME: add  textarea class in uni_form template
+		$("textarea").addClass('xxlarge');
+
+	});
+</script>
+{% endif %}
+{% endblock %}

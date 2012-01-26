@@ -1,0 +1,93 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load uni_form_tags %}
+
+{% block head_title %}{% trans "Email Admin" %}{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="span8 offset4">
+
+    <h2>{% trans "Email Admin" %}</h2>
+     
+    {% if user.emailaddress_set.all %}
+        <table class="email_list">
+            {% for emailaddress in user.emailaddress_set.all %}
+                <tr>
+                    <td>{% if emailaddress.primary %}<b>{{ emailaddress.email }}</b>{% else %}{{ emailaddress.email }}{% endif %}</td>
+                    {% if emailaddress.verified %}
+                        <td>
+                            <span class="verified">{% trans "verified" %}</span>
+                            {% if emailaddress.primary %}
+                                - <span class="primary">{% trans "primary" %}</span>
+                            {% else %}
+                                <form style="display: none;" id="primary_{{ forloop.counter }}" method="post" action="">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="email" value="{{ emailaddress.email }}"/>
+                                    <input type="hidden" name="action" value="primary"/>
+                                </form>
+                                -
+                                <a href="#" onclick="$('#primary_{{ forloop.counter }}').submit();">{% trans "make primary" %}</a>
+                            {% endif %}
+                        </td>
+                    {% else %}
+                        <td>
+                            <span class="unverified">{% trans "unverified" %}</span>
+                            <form style="display: none;" id="send_{{ forloop.counter }}" method="post" action="">
+                                {% csrf_token %}
+                                <input type="hidden" name="email" value="{{ emailaddress.email }}"/>
+                                <input type="hidden" name="action" value="send"/>
+                            </form>
+                            -
+                            <a href="#" onclick="$('#send_{{ forloop.counter }}').submit();">{% trans "re-send verification email" %}</a>
+                        </td>
+                    {% endif %}
+                    <td>
+                        {% if emailaddress.primary %}
+                        {% else %}
+                            <form style="display: none;" id="remove_{{ forloop.counter }}" method="post" action="">
+                                {% csrf_token %}
+                                <input type="hidden" name="email" value="{{ emailaddress.email }}"/>
+                                <input type="hidden" name="action" value="remove"/>
+                            </form>
+                            <a class="remove" href="#" onclick="$('#remove_{{ forloop.counter }}').submit()">{% trans "remove" %}</a>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    {% else %} {# no user.emailaddress_set.all #}
+        <div class="alert-message warning fade in" data-alert="alert">
+            <a class="close" href="#">×</a>
+            <p><strong>{% trans "None" %}</strong>. {% trans "You should really add one so you can receive notifications, reset your password if you forget it, etc." %}</p>
+        </div>
+    {% endif %}
+    
+    <h4>{% trans "Add Email Address" %}</h4>
+    
+    <form method="post" action="" class="uniForm" autocapitalize="off">
+        {% csrf_token %}
+        {{ add_email_form|as_uni_form }}
+        <input type="hidden" name="action" value="add"/>
+        <div class="clearfix">
+            <label></label>
+            <div class="input">
+                <button class="btn primary">{% trans "add" %}</button>
+            </div>
+        </div>
+    </form>
+
+    </div>
+</div>
+    
+{% endblock %}
+
+{% block extra_body %}
+    <script type="text/javascript" src="{{ STATIC_URL }}css/bootstrap/js/bootstrap-alerts.js"></script>
+    <script>
+        $(".alert-message").alert()
+    </script>
+{% endblock %}

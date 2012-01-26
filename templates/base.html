@@ -1,0 +1,64 @@
+{% load compress %}
+{% load i18n %}
+{% load participation_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block head_title_base %}{% if SITE_NAME %}{{ SITE_NAME }} : {% endif %}{% block head_title %}{% endblock %}{% endblock %}</title>
+    <meta name="description" content="Interactive Somerville seeks to involve residents in the public participation process for land use planning projects in Somerville, including the Green Line Extension Project, and works to engage residents who may not typically participate in the planning process.">
+    <meta name="author" content="Somerville Community Corporation">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    {% compress css %}
+    <link href="{{ STATIC_URL }}css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/base.css" rel="stylesheet">
+    {% block extra_head_css %}{% endblock %}
+    {% endcompress %}
+
+    {% compress js %}
+    {% block extra_head_js %}{% endblock %}
+    {% endcompress %}  
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+
+    {% block extra_head_base %}{% endblock %}
+
+  </head>
+
+  <body onload="{% block body_onload %}{% endblock %}">
+
+    {% get_topbar_content %}
+    <!-- /topbar -->
+
+    <div class="container">
+
+      {% block body %}{% endblock %}
+      <!-- /body -->
+       
+      {% include "_footer.html" %}
+      <!-- /footer -->
+
+    </div> <!-- /container -->
+
+    {% compress js %}
+    <!-- Bootstrap dependencies -->
+    <script src="{% block jquery_src %}{{ STATIC_URL }}pinax/js/jquery-1.5.2.js{% endblock %}" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}pinax/js/base.js" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}css/bootstrap/js/bootstrap-dropdown.js"></script>
+    {% block extra_body_base %}
+        {% block extra_body %}{% endblock %}
+    {% endblock %}
+    {% endcompress %}
+  </body>
+</html>

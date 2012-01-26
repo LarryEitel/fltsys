@@ -1,0 +1,59 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% load participation_tags %}
+{% load pagination_tags %}
+{% load comments %}
+
+{% block head_title %}{{ theme.title }}{% endblock %}
+
+{% block extra_head_js %}
+<script type="text/javascript">var greenline = {activities:{}};</script>
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="span10">
+    	<h2>{{ theme.title }}</h2>
+      	{{ theme.desc_as_html }}
+   </div>
+    <div id="activity-stream" class="span6">
+    	<h3>Recent Community Activity</h3>
+		<ul class="unstyled">
+		{% autopaginate activities 7 %}
+		{% for activity in activities %}
+		{% get_activity activity %}
+		{% endfor %}
+		</ul>
+		{% paginate %}
+    </div>
+</div>
+
+<hr>
+
+<div class="row">
+	<div class="span16">
+		{% get_comment_count for theme as comment_count %}
+		{% if comment_count > 0 %}
+			{% render_comment_list for theme %}
+			<h4>Post a new comment:</h4>
+		{% else %}
+			<ul class="comments unstyled"></ul>
+			<h4>Be the first to post a comment:</h4>	
+		{% endif %}
+		{% render_comment_form for theme %}
+	</div>
+</div>
+
+{% endblock %}
+
+{% block extra_body %}
+<script src="{{ STATIC_URL }}js/utils.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		// fix textarea with FIXME: add  textarea class in uni_form template
+		$("textarea").addClass('xxlarge');
+	});
+</script>
+{% endblock %}

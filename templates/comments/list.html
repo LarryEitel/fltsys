@@ -1,0 +1,12 @@
+<h3 class="comments">Discussion:</h3>
+<ul class="comments unstyled">
+	{% for comment in comment_list %}
+	<li id="c{{ comment.id }}">
+		<a class="title" href="{{ comment.user.get_absolute_url }}">{% firstof comment.user.get_profile.name comment.user_name %}</a>:
+		{{ comment.comment }}
+		<div class="meta">
+			Posted on <span class="timestamp">{{ comment.submit_date|date:"F jS Y" }}</span>
+		</div>
+	</li>
+  {% endfor %}
+</ul>

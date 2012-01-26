@@ -1,0 +1,14 @@
+<li class="activity_item">
+	{% if resource %}<a href="{{ activity.get_absolute_url }}" title="Join the discussion!" class="thumbnail"><img src="{{ resource.thumbnail_url }}" height="75" alt="Thumbnail"></a>{% endif %}<a href="{{ activity.get_absolute_url }}" class="title">{% if resource %}{{ resource.type|title }}{% else %}{{ activity.get_itemtype_display }}{% endif %}</a>: {{ activity.desc_rendered|striptags|truncatewords:30 }}<br>
+	<span class="meta">Shared by <a href="{{ activity.author.get_absolute_url }}">{% firstof activity.author.get_profile.name activity.author.username %}</a> on {{ activity.last_modified|date:"F jS Y" }}</span>
+	{% if activity.geometry %}<script type="text/javascript">
+		greenline.activities[{{ activity.id }}] = {
+			'id': {{ activity.id }},
+			'title': '{% if resource %}{{ resource.type|title }}{% else %}{{ activity.get_itemtype_display }}{% endif %}',
+			'itemtype': '{% if resource %}{{ resource.type }}{% else %}{{ activity.itemtype }}{% endif %}',
+			'lat': {{ activity.geometry.y }},
+			'lon': {{ activity.geometry.x }},
+			'desc': '{{ activity.desc_rendered|striptags|truncatewords:30 }}',
+			'url': '{{ activity.get_absolute_url }}'
+		};</script>{% endif %}
+</li>

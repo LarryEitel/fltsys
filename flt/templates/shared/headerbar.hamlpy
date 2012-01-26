@@ -1,6 +1,0 @@
-#headerbar
-  #logo
-    %a.logo{"href": "/", "title": "Go to FLT Sys Home"}
-    %h1
-      FLT Sys
-  -# include "search/form.hamlpy"

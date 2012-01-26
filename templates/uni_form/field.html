@@ -1,0 +1,41 @@
+{% load uni_form_field %}
+
+{% if field.is_hidden %}
+    {{ field }}
+{% else %}
+    <div id="div_{{ field.auto_id }}" class="clearfix ctrlHolder{% if field.errors %} error{% endif %}{% if field|is_checkbox %} checkbox{% endif %} {% if field.field.widget.attrs.class %} {{ field.field.widget.attrs.class }}{% endif %}">
+        {% for error in field.errors %}
+            <div id="error_{{ forloop.counter }}_{{ field.auto_id }}" class="alert-message error fade in" data-alert="alert">
+                <a class="close" href="#">×</a>
+                <p><strong>Error:</strong> {{ error }}</p>
+            </div>
+        {% endfor %}
+
+        {% if field|is_checkbox %}
+            {% if field.label %}<label></label>{% endif %}
+            <div class="input">
+                {{ field|with_class }}
+                <span>{{ field.label }}{% if field.field.required %}<span>*</span>{% endif %}</span>
+                {% if field.help_text %}
+                <span id="hint_{{ field.auto_id }}" class="help-block">{{ field.help_text|safe }}</span>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if field.label and not field|is_checkbox %}
+            <label for="{{ field.auto_id }}">
+                {{ field.label }}{% if field.field.required %}<span>*</span>{% endif %}
+            </label>
+        {% endif %}
+
+        {% if not field|is_checkbox %}
+            <div class="input">
+                {{ field|with_class }}
+                {% if field.help_text %}
+                <span id="hint_{{ field.auto_id }}" class="help-block">{{ field.help_text|safe }}</span>
+                {% endif %}
+            </div>
+        {% endif %}
+
+    </div>
+{% endif %}

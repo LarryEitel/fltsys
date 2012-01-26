@@ -1,0 +1,12 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load ifsetting_tag %}
+
+{% block head_title %}{{ page.title }}{% endblock %}
+
+{% block body %}
+<div class="grid_12">
+<h2>{{ page.title }}</h2>
+{{ page.content_as_html }}
+{% endblock %}

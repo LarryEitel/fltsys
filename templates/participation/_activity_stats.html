@@ -1,0 +1,7 @@
+<h5>Related Activity:</h5>
+<ul class="stats">
+	{% for stat in stats %}
+	<li>{{ stat.itemtype_display }}: {{ stat.itemtype__count }} </li>
+	{% endfor %}
+	<li>Comments: {{ comment_count }} </li>
+</ul>

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load uni_form_tags %}
+{% load ifsetting_tag %}
+{% load account_tags %}
+
+{% block head_title %}{% trans "Login" %}{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="span8 offset4">
+
+    <h1>{% trans "Log In" %}</h1>
+
+    {% if openid and not user.is_authenticated %}
+        <div class="alert-message warning fade in" data-alert="alert">
+            <a class="close" href="#">×</a>
+            <p>It appears you have started to login using OpenID. Want to <a href="/openid/register/">finish logging in</a>?</p>
+        </div>
+    {% endif %}
+    
+    
+    
+    {% if user.is_authenticated %}
+        <div class="alert-message warning fade in" data-alert="alert">
+            <a class="close" href="#">×</a>
+            {% user_display user as user_display %}
+            <p><strong>{% trans "Note" %}</strong>: {% blocktrans %}you are already logged in as {{ user_display }}.{% endblocktrans %}</p>
+        </div>
+
+    {% else %}
+        {% ifsetting ACCOUNT_OPEN_SIGNUP %}
+        {% url acct_signup as signup_url %}
+        <p>{% blocktrans %}Don't have an account? <a href="{{ signup_url }}">Sign up</a>!{% endblocktrans %}</p>
+        {% endifsetting %}
+    {% endif %}
+    
+    <form method="POST" action="{% url acct_login %}" autocapitalize="off">
+        {% csrf_token %}
+        {{ form|as_uni_form }}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <div class="clearfix">
+            <label></label>
+            <div class="input">
+                <button class="btn primary">{% trans "Log in &raquo;" %}</button>
+                <a href="{% url acct_passwd_reset %}">{% trans "Forgot password?" %}</a>
+            </div>
+        </div>
+    </form>
+    
+    <p>{% blocktrans %}If you have any trouble logging in to your account, contact us at <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a>.{% endblocktrans %}</p>
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_body %}
+<script type="text/javascript" src="{{ STATIC_URL }}css/bootstrap/js/bootstrap-alerts.js"></script>
+<script>
+    $("#id_username").focus();
+    $(".alert-message").alert();
+</script>
+{% endblock %}

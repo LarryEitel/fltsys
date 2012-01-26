@@ -1,0 +1,26 @@
+<script type="text/javascript">
+	$(document).ready(function(){	
+		// rating
+		$('#rating').raty({
+			{% if not user.is_authenticated %}readOnly: true,{% endif %}
+			start: {{ rating }},
+			path: '{{ STATIC_URL }}img',
+			width: 540,
+			click: function(score, evt) {
+				$.post('/rate/item/{{ item_id }}',
+					{
+						score: score, 
+					}
+					// no success handler required, 
+					// raty plugin provides good visual feedback
+				)
+				.error(
+					function() { 
+						// cancel the rating, no stars highlighted
+						$.fn.raty.cancel('#rating');
+					}
+				);
+			  }
+		});
+	});
+</script>

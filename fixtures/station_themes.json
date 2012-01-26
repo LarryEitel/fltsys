@@ -1,0 +1,221 @@
+[
+	{
+	    "pk": 5, 
+	    "model": "participation.station", 
+	    "fields": {
+	        "name": "Ball Square", 
+	        "geometry": "POINT (-71.1103215127649548 42.3992726549266692)", 
+	        "desc_rendered": "<p>Ball Square straddles the city limit between Somerville and Medford, with the station entrance in Somerville and the platform in Medford. </p>\n<p>This station represents a huge opportunity for place-making and innovation. Broadway should become the front door to the station with the bridge and station designed as an integrated whole. A redesigned Broadway would include bus drop-off lanes on both sides and a second entrance on the south side of Broadway to allow platform access without the need for crossing the street. Bicycle lanes in both directions and a median are also included in the concept.<br />\n</p>\n<p>Several options were explored. One requires a southward shift in the platform in order to accommodate a second entrance on the south side of Broadway.  A second option does not move the platform but would require an pedestrian tunnel under Broadway for connections to the south side of the street. A third option would utilize a mid-block street crossing instead of going under Broadway.<br />\n</p>\n<p>The current pedestrian islands should be enlarged to the full extent of the striped pavement area and become small but usable open spaces.  A secondary connection from the Winchester Street neighborhood, over the tracks to the station, should be included as part of the design. </p>", 
+	        "desc_markup_type": 2, 
+	        "slug": "ball-square", 
+	        "desc": "Ball Square straddles the city limit between Somerville and Medford, with the station entrance in Somerville and the platform in Medford. \r\n\r\nThis station represents a huge opportunity for place-making and innovation. Broadway should become the front door to the station with the bridge and station designed as an integrated whole. A redesigned Broadway would include bus drop-off lanes on both sides and a second entrance on the south side of Broadway to allow platform access without the need for crossing the street. Bicycle lanes in both directions and a median are also included in the concept.  \r\n\r\nSeveral options were explored. One requires a southward shift in the platform in order to accommodate a second entrance on the south side of Broadway.  A second option does not move the platform but would require an pedestrian tunnel under Broadway for connections to the south side of the street. A third option would utilize a mid-block street crossing instead of going under Broadway.  \r\n\r\nThe current pedestrian islands should be enlarged to the full extent of the striped pavement area and become small but usable open spaces.  A secondary connection from the Winchester Street neighborhood, over the tracks to the station, should be included as part of the design. "
+	    }
+	}, 
+	{
+	    "pk": 4, 
+	    "model": "participation.station", 
+	    "fields": {
+	        "name": "Lowell Street", 
+	        "geometry": "POINT (-71.1058777188334972 42.3931989107982830)", 
+	        "desc_rendered": "<p>Lowell Street station is located in a primarily residential area. Recently two large industrial buildings, immediately adjacent to the proposed station site, have been demolished to clear land for a new residential development. </p>\n<p>The vertical geometry of Lowell Street makes it a particularly difficult location for a street crossing because it limits sight distances for both pedestrians and vehicles. A second station entrance on the opposite side of the street is recommended along with a kiss and ride drop-off. A shift of or extension to the platform may be required for a second entrance.<br />\n</p>\n<p>Because the Community Path meets Lowell Street at this location, and because the station will attract additional bicycle riders, Lowell Street must be designed to accommodate bicycles. The community paths connection to the station should be simple and direct, without a street crossing if possible, and convenient, safe and plentiful bicycle parking is essential. Also, because of the community path and station, pedestrian traffic will significantly increase. </p>\n<p>Lowell Street should be designed as a promenade with wider sidewalks, station entry plazas and street trees.  Ideally, street-level retail would be part of the <a href=\"http://www.ward5online.com/2010/09/updated-max-pak-illustrations-courtesy.html\">Max-Pak development</a> adjacent to the station, but the difference in elevation between the street and the parcel make this infeasible. Therefore, a small neighborhood retail development should be created south of the station between Alpine and Albion streets. </p>", 
+	        "desc_markup_type": 2, 
+	        "slug": "lowell-street", 
+	        "desc": "Lowell Street station is located in a primarily residential area. Recently two large industrial buildings, immediately adjacent to the proposed station site, have been demolished to clear land for a new residential development. \r\n\r\nThe vertical geometry of Lowell Street makes it a particularly difficult location for a street crossing because it limits sight distances for both pedestrians and vehicles. A second station entrance on the opposite side of the street is recommended along with a kiss and ride drop-off. A shift of or extension to the platform may be required for a second entrance.  \r\n\r\nBecause the Community Path meets Lowell Street at this location, and because the station will attract additional bicycle riders, Lowell Street must be designed to accommodate bicycles. The community paths connection to the station should be simple and direct, without a street crossing if possible, and convenient, safe and plentiful bicycle parking is essential. Also, because of the community path and station, pedestrian traffic will significantly increase. \r\n\r\nLowell Street should be designed as a promenade with wider sidewalks, station entry plazas and street trees.  Ideally, street-level retail would be part of the [Max-Pak development](http://www.ward5online.com/2010/09/updated-max-pak-illustrations-courtesy.html) adjacent to the station, but the difference in elevation between the street and the parcel make this infeasible. Therefore, a small neighborhood retail development should be created south of the station between Alpine and Albion streets. "
+	    }
+	}, 
+	{
+	    "pk": 3, 
+	    "model": "participation.station", 
+	    "fields": {
+	        "name": "Gilman Square", 
+	        "geometry": "POINT (-71.0953588683260733 42.3873727913478930)", 
+	        "desc_rendered": "<p>Gilman Square is not an easily recognized place for those from outside the neighborhood. The adjacent Somerville City Hall, High School and Library buildings dominate the landscape and are the images in most minds when they think of this area. </p>\n<p>The proposed station is located at the bottom of a steep slope behind the these civic buildings, and the hill creates a formidable barrier between the station and important destinations for transit users. Making connections between these destinations and the station is the key challenge for this location.<br />\n</p>\n<p>Medford Street is a high-volume street, with several in gas stations. Safe and attractive pedestrian connections to the station, from all directions, is critical to the station success.  A city-owned building next to the station site, a former peanut butter factory, should be redeveloped as part of the station area plan. </p>\n<p>This is a logical site for transit-oriented development and an opportunity to create a Somerville Center which might include a mini-mall with retail, restaurants and most importantly jobs for teenagers. A job center for teenagers is also recommended. The removal of the small additions to the main building will provide needed circulation space for the building and the station.<br />\n</p>\n<p>The community path should be on the Medford Street side of the tracks at this location. The diagram shows a relocated community path crossing, closer to School Street, that connects with a larger bicycle storage facility and also links with access to the high school.  The creation of this station should help justify a north-south bus route connecting Ten Hills and Union Square. </p>", 
+	        "desc_markup_type": 2, 
+	        "slug": "gilman-square", 
+	        "desc": "Gilman Square is not an easily recognized place for those from outside the neighborhood. The adjacent Somerville City Hall, High School and Library buildings dominate the landscape and are the images in most minds when they think of this area. \r\n\r\nThe proposed station is located at the bottom of a steep slope behind the these civic buildings, and the hill creates a formidable barrier between the station and important destinations for transit users. Making connections between these destinations and the station is the key challenge for this location.  \r\n\r\nMedford Street is a high-volume street, with several in gas stations. Safe and attractive pedestrian connections to the station, from all directions, is critical to the station success.  A city-owned building next to the station site, a former peanut butter factory, should be redeveloped as part of the station area plan. \r\n\r\nThis is a logical site for transit-oriented development and an opportunity to create a Somerville Center which might include a mini-mall with retail, restaurants and most importantly jobs for teenagers. A job center for teenagers is also recommended. The removal of the small additions to the main building will provide needed circulation space for the building and the station.  \r\n\r\nThe community path should be on the Medford Street side of the tracks at this location. The diagram shows a relocated community path crossing, closer to School Street, that connects with a larger bicycle storage facility and also links with access to the high school.  The creation of this station should help justify a north-south bus route connecting Ten Hills and Union Square. "
+	    }
+	}, 
+	{
+	    "pk": 1, 
+	    "model": "participation.station", 
+	    "fields": {
+	        "name": "Union Square", 
+	        "geometry": "POINT (-71.0952119368064217 42.3774636397176181)", 
+	        "desc_rendered": "<p>Various Union Square options were studied, and the State prefers that the Green Line follow the Fitchburg rail line and stop south of the square. If the stop is located here, which may not be ideal, it will be important to optimize pedestrian, bicycle and bus access.</p>", 
+	        "desc_markup_type": 2, 
+	        "slug": "union-square", 
+	        "desc": "Various Union Square options were studied, and the State prefers that the Green Line follow the Fitchburg rail line and stop south of the square. If the stop is located here, which may not be ideal, it will be important to optimize pedestrian, bicycle and bus access."
+	    }
+	}, 
+	{
+	    "pk": 7, 
+	    "model": "participation.station", 
+	    "fields": {
+	        "name": "Route 16", 
+	        "geometry": "POINT (-71.1277117633041485 42.4171360756013200)", 
+	        "desc_rendered": "<p>Route 16/Mystic Valley station is in the City of Somerville but is surrounded on three sides by Medford. The station would serve West Somerville, West Medford and East Arlington, and strong connections to each community, for all modes, is critical.<br />\n</p>\n<p>This station is a perfect opportunity for <a href=\"http://www.reconnectingamerica.org/public/tod\">transit-oriented development</a>. Previous work by the <a href=\"http://www.medfordgreenline.org/\">Medford Green Line Neighborhood Alliance</a> recommended a number of modifications to the <a href=\"http://www.greenlineextension.org/\">MassDOT</a> concept plan and the CPP Workshop team built on this work.<br />\n</p>\n<p>Recommendations include:<br />\n</p>\n<ol>\n<li>\n<p>Realign the Green Line tracks so that they are parallel to the U-Haul building and locate the platform in the area currently occupied by the addition to the U-Haul building. This reduces the impacts to adjacent commercial buildings.<br />\n</p>\n</li>\n<li>\n<p>Reuse the U-Haul building for station functions and redevelop the remainder of the building for mixed use with an emphasis on convenience retail, office and housing. Not only does the building present an opportunity for redevelopment, but keeping it takes advantage of the industrial architecture that defines the area visually and historically.<br />\n</p>\n</li>\n<li>\n<p>Create an open space in the area in front of the building.<br />\n</p>\n</li>\n<li>\n<p>Place bus stops and a pick-up/drop-off area along Boston Avenue with connections through the open space. Add a path either: a) between the houses, b) by removing one or more houses, or c) by removing the gas station.<br />\n</p>\n</li>\n<li>\n<p>Create a safe and convenient pedestrian and bicycle connection across Route 16 to Medford on a bridge parallel to the railroad bridge. </p>\n</li>\n<li>\n<p>Create a pedestrian and bicycle connection under the embankment to the Whole Foods site and to the Walking Court elderly housing project, with a connection to the platform. </p>\n</li>\n<li>\n<p>Consider the bicycle connections within a five-mile radius to ensure safe and convenient connections to this terminal station. </p>\n</li>\n</ol>", 
+	        "desc_markup_type": 2, 
+	        "slug": "route-16", 
+	        "desc": "Route 16/Mystic Valley station is in the City of Somerville but is surrounded on three sides by Medford. The station would serve West Somerville, West Medford and East Arlington, and strong connections to each community, for all modes, is critical.  \r\n\r\nThis station is a perfect opportunity for [transit-oriented development](http://www.reconnectingamerica.org/public/tod). Previous work by the [Medford Green Line Neighborhood Alliance](http://www.medfordgreenline.org/) recommended a number of modifications to the [MassDOT](http://www.greenlineextension.org/) concept plan and the CPP Workshop team built on this work.  \r\n\r\nRecommendations include:  \r\n\r\n1. Realign the Green Line tracks so that they are parallel to the U-Haul building and locate the platform in the area currently occupied by the addition to the U-Haul building. This reduces the impacts to adjacent commercial buildings.  \r\n\r\n2.  Reuse the U-Haul building for station functions and redevelop the remainder of the building for mixed use with an emphasis on convenience retail, office and housing. Not only does the building present an opportunity for redevelopment, but keeping it takes advantage of the industrial architecture that defines the area visually and historically.  \r\n\r\n3.  Create an open space in the area in front of the building.  \r\n\r\n4. Place bus stops and a pick-up/drop-off area along Boston Avenue with connections through the open space. Add a path either: a) between the houses, b) by removing one or more houses, or c) by removing the gas station.  \r\n\r\n5. Create a safe and convenient pedestrian and bicycle connection across Route 16 to Medford on a bridge parallel to the railroad bridge. \r\n\r\n6. Create a pedestrian and bicycle connection under the embankment to the Whole Foods site and to the Walking Court elderly housing project, with a connection to the platform. \r\n\r\n7. Consider the bicycle connections within a five-mile radius to ensure safe and convenient connections to this terminal station. "
+	    }
+	}, 
+	{
+	    "pk": 2, 
+	    "model": "participation.station", 
+	    "fields": {
+	        "name": "Washington Street", 
+	        "geometry": "POINT (-71.0879260748612580 42.3808894565381848)", 
+	        "desc_rendered": "<p>Washington Street (Brickbottom) station location is in a largely forgotten area and the proposed MassDOT location on Joy Street lacks visibility. This station will serve five distinct neighborhoods and create a new crossroads for Somerville. </p>\n<p>The station would be better located on the railroad bridge above Washington Street where it would be more visible and centrally located while providing access from both sides of the street. This arrangement would also allow for more direct bus connections to the station from both sides of Washington Street. </p>\n<p>The MBTA-owned land, behind Cafe Belo, should be used to create a retail anchor that would, along with the station, create a sense of place. The confluence of the Community Path and people cycling to the station on other routes suggest a bicycle shop as part of the development around the station. </p>\n<p>Future plans for the area call for the removal of the McGrath Highway viaduct which will create a stronger connection to the station from the west.  A new bridge that will support the station should be designed to be a thinner structure to allow for the raising of Washington Street and reduce flooding problems.</p>", 
+	        "desc_markup_type": 2, 
+	        "slug": "washington-street", 
+	        "desc": "Washington Street (Brickbottom) station location is in a largely forgotten area and the proposed MassDOT location on Joy Street lacks visibility. This station will serve five distinct neighborhoods and create a new crossroads for Somerville. \r\n\r\nThe station would be better located on the railroad bridge above Washington Street where it would be more visible and centrally located while providing access from both sides of the street. This arrangement would also allow for more direct bus connections to the station from both sides of Washington Street. \r\n\r\nThe MBTA-owned land, behind Cafe Belo, should be used to create a retail anchor that would, along with the station, create a sense of place. The confluence of the Community Path and people cycling to the station on other routes suggest a bicycle shop as part of the development around the station. \r\n\r\nFuture plans for the area call for the removal of the McGrath Highway viaduct which will create a stronger connection to the station from the west.  A new bridge that will support the station should be designed to be a thinner structure to allow for the raising of Washington Street and reduce flooding problems."
+	    }
+	}, 
+	{
+	    "pk": 6, 
+	    "model": "participation.station", 
+	    "fields": {
+	        "name": "College Avenue", 
+	        "geometry": "POINT (-71.1161539211061466 42.4068783776216165)", 
+	        "desc_rendered": "<p>College Avenue station is surrounded by Tufts University and, beyond the campus, dense residential neighborhoods. The station location is a natural crossroads for the area and a plaza at the intersection of Boston Avenue and College Avenue should be an essential part of both the station design and the public realm infrastructure. </p>\n<p>Connections to Medford residential neighborhoods to the north must not be neglected in the planning and design of the station and its surroundings.  College is an important intermediate step both in life and on the Green Line. This station should not be a terminus, but a plaza where college and citizenship meet.  With many people arriving on campus from this location, the station will be a gateway to Tufts and the surrounding community. </p>\n<p>Skilled urban design is needed to integrate the station with the rest of the campus, and with the ample potential for new development along the north side of Boston Avenue east of the station. </p>\n<p>Access to the platform from both sides of College Avenue is desirable.  Off-street bus loading is desirable adjacent to the station. </p>\n<p>Topography is a huge challenge. Not only at the station itself, where the platform is roughly twenty-five feet below the street, but also across Boston Avenue where the main campus rises thirty or more feet from the street. </p>\n<p>Dowling Hall and garage may provide one path for vertical circulation. Images from a recent <a href=\"http://ase.tufts.edu/faculty-meetings/2005-2006/ase/10-19-05/master-plan.pdf\">Tufts University Campus Master Plan</a> show a proposed pedestrian bridge over Boston Avenue connecting to a plaza west of where the station is now planned. Although the currency of the master plan is unknown, the recognition of the crossroads nature of the plaza at the intersection of Boston and College avenues is undeniable.<br />\n</p>\n<p>The visibility of this station is constrained by topography and street orientation. Tall elements, such as T signs or wind turbines that can be seen from a distance, are recommended to mark this location as a gateway. </p>", 
+	        "desc_markup_type": 2, 
+	        "slug": "college-avenue", 
+	        "desc": "College Avenue station is surrounded by Tufts University and, beyond the campus, dense residential neighborhoods. The station location is a natural crossroads for the area and a plaza at the intersection of Boston Avenue and College Avenue should be an essential part of both the station design and the public realm infrastructure. \r\n\r\nConnections to Medford residential neighborhoods to the north must not be neglected in the planning and design of the station and its surroundings.  College is an important intermediate step both in life and on the Green Line. This station should not be a terminus, but a plaza where college and citizenship meet.  With many people arriving on campus from this location, the station will be a gateway to Tufts and the surrounding community. \r\n\r\nSkilled urban design is needed to integrate the station with the rest of the campus, and with the ample potential for new development along the north side of Boston Avenue east of the station. \r\n\r\nAccess to the platform from both sides of College Avenue is desirable.  Off-street bus loading is desirable adjacent to the station. \r\n\r\nTopography is a huge challenge. Not only at the station itself, where the platform is roughly twenty-five feet below the street, but also across Boston Avenue where the main campus rises thirty or more feet from the street. \r\n\r\nDowling Hall and garage may provide one path for vertical circulation. Images from a recent [Tufts University Campus Master Plan](http://ase.tufts.edu/faculty-meetings/2005-2006/ase/10-19-05/master-plan.pdf) show a proposed pedestrian bridge over Boston Avenue connecting to a plaza west of where the station is now planned. Although the currency of the master plan is unknown, the recognition of the crossroads nature of the plaza at the intersection of Boston and College avenues is undeniable.  \r\n\r\nThe visibility of this station is constrained by topography and street orientation. Tall elements, such as T signs or wind turbines that can be seen from a distance, are recommended to mark this location as a gateway. "
+	    }
+	}, 
+	{
+	    "pk": 1, 
+	    "model": "participation.line", 
+	    "fields": {
+	        "geometry": "LINESTRING (-71.0825671614576464 42.3750581182085284, -71.0865839800180197 42.3755311524344762, -71.0891931945485993 42.3758224461420738, -71.0906941527461669 42.3759875659735101, -71.0915299791920319 42.3761033153487432, -71.0923652635168111 42.3763036406071478, -71.0935668649592429 42.3767026169413015, -71.0952119368064359 42.3774636397176252)"
+	    }
+	}, 
+	{
+	    "pk": 2, 
+	    "model": "participation.line", 
+	    "fields": {
+	        "geometry": "LINESTRING (-71.0778114975616830 42.3713499548010333, -71.0806603314609333 42.3738112004329466, -71.0825671614576464 42.3750581182085284, -71.0841741825596927 42.3766866969068374, -71.0855337432793135 42.3781201313192852, -71.0879260748612580 42.3808894565382062, -71.0901162028937108 42.3829847686444268, -71.0916435197276400 42.3846568128774166, -71.0924602108921846 42.3854648203313076, -71.0930149128682274 42.3859460914722419, -71.0936578199210771 42.3865122550854565, -71.0946936142689481 42.3870985960247140, -71.0953588683260733 42.3873727913479073, -71.0975946705413548 42.3884264039399810, -71.0999207433784619 42.3894777132981275, -71.1015389276548007 42.3902088676096085, -71.1027147865954561 42.3907204349321063, -71.1033970424983863 42.3910987154390853, -71.1043818777447996 42.3917505795029967, -71.1052082418918587 42.3924037710072454, -71.1058777188335114 42.3931989107982972, -71.1068685810037380 42.3945334408888996, -71.1095027272185973 42.3981146497183943, -71.1103215127649548 42.3992726549266905, -71.1119935006336590 42.4013447601340800, -71.1142441320834990 42.4044856661862681, -71.1151121838072555 42.4056257468025777, -71.1161539211061466 42.4068783776216449, -71.1171188985400846 42.4082592174760507, -71.1179122811588655 42.4091809907022039, -71.1191740011736897 42.4102565582623328, -71.1205243137050047 42.4113699961566510, -71.1225015587845064 42.4130767162514530, -71.1277117633041485 42.4171360756013627)"
+	    }
+	}, 
+	{
+	    "pk": 1, 
+	    "model": "participation.theme", 
+	    "fields": {
+	        "desc_rendered": "<p>We want a fixed percentage of respectable jobs of all types with good wages and benefits for Somerville residents, from construction to permanent.</p>", 
+	        "desc_markup_type": 2, 
+	        "desc": "We want a fixed percentage of respectable jobs of all types with good wages and benefits for Somerville residents, from construction to permanent.", 
+	        "slug": "more-local-jobs", 
+	        "title": "More Local Jobs"
+	    }
+	}, 
+	{
+	    "pk": 2, 
+	    "model": "participation.theme", 
+	    "fields": {
+	        "desc_rendered": "<p>We want to see the creation of squares as destinations, with careful attention to mixed use of commercial/residential, reuse of buildings, and economic development to increase the tax base.</p>", 
+	        "desc_markup_type": 2, 
+	        "desc": "We want to see the creation of squares as destinations, with careful attention to mixed use of commercial/residential, reuse of buildings, and economic development to increase the tax base.", 
+	        "slug": "increase-commercial-and-economic-development", 
+	        "title": "Increase Commercial and Economic Development"
+	    }
+	}, 
+	{
+	    "pk": 3, 
+	    "model": "participation.theme", 
+	    "fields": {
+	        "desc_rendered": "<p>We want locally owned, culturally diverse, clean businesses in commercial areas with employees who live in Somerville.</p>", 
+	        "desc_markup_type": 2, 
+	        "desc": "We want locally owned, culturally diverse, clean businesses in commercial areas with employees who live in Somerville.", 
+	        "slug": "keep-and-add-local-businesses", 
+	        "title": "Keep and Add Local Businesses"
+	    }
+	}, 
+	{
+	    "pk": 4, 
+	    "model": "participation.theme", 
+	    "fields": {
+	        "desc_rendered": "<p>We want to make sure people of all economic means have the ability to afford housing and living costs, so that Somerville residents, such as child care workers, cab drivers, local business employees and others can stay here affordably.</p>", 
+	        "desc_markup_type": 2, 
+	        "desc": "We want to make sure people of all economic means have the ability to afford housing and living costs, so that Somerville residents, such as child care workers, cab drivers, local business employees and others can stay here affordably.", 
+	        "slug": "keep-somerville-affordable", 
+	        "title": "Keep Somerville Affordable"
+	    }
+	}, 
+	{
+	    "pk": 5, 
+	    "model": "participation.theme", 
+	    "fields": {
+	        "desc_rendered": "<p>We want to preserve and encourage economic and ethnic diversity of residents and businesses.</p>", 
+	        "desc_markup_type": 2, 
+	        "desc": "We want to preserve and encourage economic and ethnic diversity of residents and businesses.", 
+	        "slug": "maintain-our-diversity", 
+	        "title": "Maintain Our Diversity"
+	    }
+	}, 
+	{
+	    "pk": 6, 
+	    "model": "participation.theme", 
+	    "fields": {
+	        "desc_rendered": "<p>We want a safe, environmentally friendly neighborhood with more green space, trees, and gardens; reduction of noise; avoidance of light pollution; and prevention of toxic chemicals in the air.</p>", 
+	        "desc_markup_type": 2, 
+	        "desc": "We want a safe, environmentally friendly neighborhood with more green space, trees, and gardens; reduction of noise; avoidance of light pollution; and prevention of toxic chemicals in the air.", 
+	        "slug": "improve-green-environment", 
+	        "title": "Improve the Green Environment"
+	    }
+	}, 
+	{
+	    "pk": 7, 
+	    "model": "participation.theme", 
+	    "fields": {
+	        "desc_rendered": "<p>We want to encourage walking and cycling, through safe, bike/ pedestrian friendly design of streets and paths around and between stations.</p>", 
+	        "desc_markup_type": 2, 
+	        "desc": "We want to encourage walking and cycling, through safe, bike/ pedestrian friendly design of streets and paths around and between stations.", 
+	        "slug": "encourage-walking-and-biking", 
+	        "title": "Encourage Walking and Biking"
+	    }
+	}, 
+	{
+	    "pk": 8, 
+	    "model": "participation.theme", 
+	    "fields": {
+	        "desc_rendered": "<p>We want both indoor and outdoor safe, public gathering spaces for community members.</p>", 
+	        "desc_markup_type": 2, 
+	        "desc": "We want both indoor and outdoor safe, public gathering spaces for community members.", 
+	        "slug": "create-community-gathering-spaces", 
+	        "title": "Create Community Gathering Spaces"
+	    }
+	}, 
+	{
+	    "pk": 9, 
+	    "model": "participation.theme", 
+	    "fields": {
+	        "desc_rendered": "<p>We want above standard, safe access to and between stations for people with disabilities, strollers, and pedestrians in general.</p>", 
+	        "desc_markup_type": 2, 
+	        "desc": "We want above standard, safe access to and between stations for people with disabilities, strollers, and pedestrians in general.", 
+	        "slug": "improve-access", 
+	        "title": "Improve Access"
+	    }
+	}, 
+	{
+	    "pk": 10, 
+	    "model": "participation.theme", 
+	    "fields": {
+	        "desc_rendered": "<p>We want to make sure residents are included on an ongoing basis in the plan- ning, design, and zoning changes to the stations and areas around them. Youth, artists, and others should help design stations, with attention to amenities. We need an easy and clear process for residents to address problems as they come up, with ways of immediately resolving unseen impacts.</p>", 
+	        "desc_markup_type": 2, 
+	        "desc": "We want to make sure residents are included on an ongoing basis in the plan- ning, design, and zoning changes to the stations and areas around them. Youth, artists, and others should help design stations, with attention to amenities. We need an easy and clear process for residents to address problems as they come up, with ways of immediately resolving unseen impacts.", 
+	        "slug": "community-involvement", 
+	        "title": "Community Involvement"
+	    }
+	}, 
+	{
+	    "pk": 11, 
+	    "model": "participation.theme", 
+	    "fields": {
+	        "desc_rendered": "<p>We want to ensure inter-modal access between neighborhoods and stations, for new train service to be adequate and speedy, and for existing bus lines to continue to serve areas not connected by train.</p>", 
+	        "desc_markup_type": 2, 
+	        "desc": "We want to ensure inter-modal access between neighborhoods and stations, for new train service to be adequate and speedy, and for existing bus lines to continue to serve areas not connected by train.", 
+	        "slug": "connecting-buses-and-trains", 
+	        "title": "Connecting Buses and Trains"
+	    }
+	}
+]

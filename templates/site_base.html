@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% load analytics_tags %}
+
+{% block extra_head_base %}
+    {% block extra_head %}{% endblock %}
+    {% analytics %}
+{% endblock %}
