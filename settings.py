@@ -153,6 +153,8 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.humanize",
+    'django.contrib.gis',
+    "django_extensions",
     
     "pinax.templatetags",
     
@@ -161,6 +163,7 @@ INSTALLED_APPS = [
     "staticfiles",
     "compressor",
     "debug_toolbar",
+    "djboss",
     "mailer",
     "uni_form",
     "django_openid",
@@ -189,6 +192,13 @@ INSTALLED_APPS = [
 
     # interactivesomerville
     "participation",
+    "home",
+    "en",
+    'common',
+    "core",
+    "current_user",
+    "boundaries",
+    'gunicorn',
 
 ]
 

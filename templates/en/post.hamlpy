@@ -1,0 +1,13 @@
+- extends "base.html"
+
+- block head_title
+    Home
+
+- block appbar
+
+- block pageheader
+
+- block content
+    {{ userId }}
+    {{ guid }}
+    {{ reason }}

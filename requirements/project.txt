@@ -11,7 +11,7 @@ PIL==1.1.7
 GPolyEncode==0.1.1
 
 #psycopg2==2.4.2
-#mysql-python
+mysql-python
 
 South==0.7.3
 django-model-utils==1.0.0
@@ -22,3 +22,11 @@ mercurial==1.8
 wsgiref==0.1.2
 -e git://github.com/worldcompany/djangoembed.git#egg=djangoembed
 django-ratings==0.3.6
+html2text               # Convert HTML to Markdown-formatted text, https://github.com/aaronsw/html2text
+django_extensions       # shell_plus
+
+#specify commands in individual apps and then run them using the djboss command-line interface
+-e git://github.com/zacharyvoase/django-boss.git#egg=django-boss
+
+
+gunicorn                # python server, http://gunicorn.org/

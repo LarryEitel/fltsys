@@ -6,26 +6,11 @@
 <div class="topbar" data-dropdown="dropdown">
   <div class="topbar-inner">
     <div class="container">
-      <a href="/" title="Interactive Somerville" class="logo"><img src="{% get_static_prefix %}img/logo_small.png" alt="Interactive Somerville" width="90" height="35" /></a>
       <ul class="nav">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle">Station Areas</a>
-          <ul class="dropdown-menu">
-          {% for station in stations  %}
-            <li><a href="{{ station.get_absolute_url }}">{{ station.name }}</a></li>
-          {% endfor %}
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle">Themes</a>
-          <ul class="dropdown-menu">
-          {% for theme in themes  %}
-            <li><a href="{{ theme.get_absolute_url }}">{{ theme.title }}</a></li>
-          {% endfor %}
-          </ul>
+          <a href="/" title="Foreign Language Territory System">Foreign Language Territory System (FLT)</a>
         </li>
         {% page_links 't' %}
-        <li><a href="{% url share %}"><strong>Share something!</strong></a></li>
       </ul>
       <ul class="nav secondary-nav">
       {% if user.is_authenticated %}

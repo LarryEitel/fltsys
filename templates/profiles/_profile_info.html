@@ -5,22 +5,9 @@
 	<div class="span6">
 		<h4>About me:</h4>
 	    <ul class="unstyled">
-	    {% if profile.about %}<li>{{ profile.about }}</li>{% endif %}
-	    {% if profile.website %}<li><a href="{{ profile.website }}">{{ profile.website }}</a></li>{% endif %}
 	    </ul>
 	</div>
 	{% endif %}
 
-	{% if profile.flickr_id or profile.youtube_id or profile.twitter_id or profile.facebook_id %}
-	<div class="span6">
-		<h4>Find me on:</h4>
-		<ul class="unstyled">
-			{% if profile.flickr_id %}<li><a href="http://www.flickr.com/photos/{{ profile.flickr_id }}/">Flickr</a></li>{% endif %}
-			{% if profile.youtube_id %}<li><a href="http://www.youtube.com/{{ profile.youtube_id }}/">YouTube</a></li>{% endif %}
-			{% if profile.twitter_id %}<li><a href="http://www.twitter.com/{{ profile.twitter_id }}/">Twitter</a></li>{% endif %}
-			{% if profile.facebook_id %}<li><a href="http://www.facebook.com/{{ profile.facebook_id }}/">Facebook</a></li>{% endif %}
-		</ul>
-	</div>
-	{% endif %}
 </div>
 	

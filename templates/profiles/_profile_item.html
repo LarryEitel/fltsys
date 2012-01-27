@@ -7,9 +7,6 @@
         {% else %}
             <a href="{% url profile_detail profile.user.username %}">{% user_display profile.user %}</a>
         {% endif %}
-    </span>,
-    <span class="details">
-        {% if profile.mystation %}{{ profile.mystation }}{% endif %}
     </span>
     </li>
 </ul>

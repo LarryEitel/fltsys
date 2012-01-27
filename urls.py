@@ -15,7 +15,13 @@ urlpatterns = patterns("",
 #    url(r"^$", direct_to_template, {
 #        "template": "homepage.html",
 #    }, name="home"),
-    url(r"^$", "participation.views.home", name="home"),
+    url(r"^$", "home.views.home", name="home"),
+    
+    
+    url(r"evernote/", include('en.urls')),    
+    
+    
+    url(r"participation/$", "participation.views.home", name="participation"),
 
     url(r"^station-areas/$", "participation.views.station_areas_list", name="station_areas_list"),
     url(r"^station-areas/(?P<slug>[-\w]+)/$", "participation.views.station_area_detail", name="station_area_detail"),
