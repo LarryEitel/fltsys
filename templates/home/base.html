@@ -9,24 +9,3 @@
 {% block body %}
 <div class="map_container"><div id="map" class="map16"></div></div>
 {% endblock %}
-
-{% block extra_body %}
-<script type="text/javascript">
-		
-	$(document).ready(function(){
-		
-		// media url
-		greenline.static_url = '{{ STATIC_URL }}';
-		
-		// basemap
-		greenline.createBasemap('map');
-		
-		// zoom and center
-		greenline.map.setOptions({
-			zoom: 13,
-			center: new google.maps.LatLng(42.397, -71.11)
-		});
-	});
-
-</script>
-{% endblock %}
