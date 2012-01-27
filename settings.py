@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 # Django settings for basic pinax project.
-
+import sys
 import os.path
 import posixpath
 import pinax
 
 PINAX_ROOT = os.path.abspath(os.path.dirname(pinax.__file__))
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+
+sys.path.append(os.path.join(PROJECT_ROOT, "parts"))
 
 # tells Pinax to use the default theme
 PINAX_THEME = "default"
