@@ -1,0 +1,35 @@
+﻿DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+MEDIA_DEV_MODE = DEBUG
+
+ADMINS = (
+    ("Larry", "larry@eitel.com"),
+)
+
+CONTACT_EMAIL = "larry@fltsys.org"
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.mysql',
+        'NAME': "_g",
+        'USER': 'root',
+        'PASSWORD': 'zaq12wsx',
+        'HOST': '', 
+        'PORT': '',
+    }
+}
+
+GEOS_LIBRARY_PATH = '/usr/local/lib/libgeos_c.so'
+
+GOOGLE_ANALYTICS_CODE = "UA-9461442-3"
+
+DEBUG_TOOLBAR_CONFIG = {
+    "INTERCEPT_REDIRECTS": False,
+}
+
+DEFAULT_FROM_EMAIL = "larry@fltsys.org"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = "larry@fltsys.org"
+EMAIL_HOST_PASSWORD = "FltSys2011"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

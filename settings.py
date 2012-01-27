@@ -153,7 +153,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.humanize",
-    'django.contrib.gis',
+    #'django.contrib.gis',
     "django_extensions",
     
     "pinax.templatetags",
