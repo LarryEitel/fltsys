@@ -5,20 +5,26 @@
 
 # Put project-specific requirements here.
 # See http://pip-installer.org/requirement-format.html for more information.
-
+fabric
 BeautifulSoup==3.2.0
-PIL==1.1.7
 GPolyEncode==0.1.1
 
 #psycopg2==2.4.2
+# under windows, pip complained with these.
 mysql-python
+mercurial
+PIL==1.1.7
+# I was able to successfully use:
+# pypm -E ve install mysql-python
+# pypm -E ve install mercurial
+# pypm -E ve install pil
+# Then just rerun pip install -r requirements\project.txt
 
 South==0.7.3
 django-model-utils==1.0.0
 Markdown==2.0.3
 textile==2.1.5
 docutils==0.7
-mercurial==1.8
 wsgiref==0.1.2
 -e git://github.com/worldcompany/djangoembed.git#egg=djangoembed
 django-ratings==0.3.6
