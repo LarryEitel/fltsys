@@ -15,5 +15,4 @@ site_media
 private
 
 local_settings.py
-fabfile.py
 flt.wp*

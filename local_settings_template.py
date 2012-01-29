@@ -57,3 +57,13 @@ EVERNOTE_CONSUMER_KEY = ''
 EVERNOTE_CONSUMER_SECRET = ''
 EVERNOTE_USER = ''
 EVERNOTE_PW = ''
+
+
+# fabric settings
+FABRIC = {
+    'live': {
+        'HOSTS': ['host.com'],
+        'WEB_USER': 'www-data',
+        'ADMIN_USER': 'admin',
+    }
+}

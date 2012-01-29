@@ -249,6 +249,15 @@ PAGINATION_DISPLAY_DISABLED_NEXT_LINK = True
 PAGINATION_DEFAULT_PAGINATION = 5
 PAGINATION_DEFAULT_WINDOW = 2
 
+
+# fabric settings
+FABRIC = {
+    'live': {
+        'HOSTS': ['host.com'],
+        'WEB_USER': 'www-data',
+        'ADMIN_USER': 'admin',
+    }
+}
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.
 try:
