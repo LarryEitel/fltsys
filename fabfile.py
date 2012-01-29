@@ -9,7 +9,7 @@ fab = settings.FABRIC['live']
 
 
 env.hosts = fab['HOSTS']
-env.user = fab['WEB_USER']
+env.user = fab['ADMIN_USER']
 env.admin_user = fab['ADMIN_USER']
 env.dbname = db['NAME']
 env.dbuser = db['USER']
@@ -37,9 +37,11 @@ def commit(msg):
         local('git push origin master') # push local to repository 
          
 def update_remote():
+    env.user = fab['WEB_USER']
+    
     with cd('/srv/x/flt'): 
         run('git pull origin master') # pull from repository to remote 
-        run('python manage.py collectstatic -v0 --noinput')
+        #run('python manage.py collectstatic -v0 --noinput')
          
 def restart(): 
     #sudo('supervisorctl restart flt')
@@ -49,7 +51,7 @@ def restart():
 def deploy(msg="No Msg"):
     #if push_code: 
         #commit_code() 
-    commit_code(msg)
+    commit(msg)
     update_remote() 
     #restart()     
    
