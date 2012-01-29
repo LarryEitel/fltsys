@@ -4,8 +4,7 @@
 
 {% block head_title %}{% blocktrans %}Welcome!{% endblocktrans %}{% endblock %}
 
-{% block extra_head_js %}
-{% endblock %}
+{% block extra_head_js %}{% include "_map_scripts.html" %}{% endblock %}
 
 {% block body %}
 <div class="map_container"><div id="map" class="map16"></div></div>

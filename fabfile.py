@@ -56,7 +56,7 @@ def update_remote():
     
     with cd(fab['PROJECT_ROOT']): 
         run('git pull origin master') # pull from repository to remote 
-        #run('python manage.py collectstatic -v0 --noinput')
+        run('python manage.py collectstatic -v0 --noinput')
          
 def restart(): 
     sudo('supervisorctl restart flt')
