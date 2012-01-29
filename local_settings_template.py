@@ -65,5 +65,6 @@ FABRIC = {
         'HOSTS': ['host.com'],
         'WEB_USER': 'www-data',
         'ADMIN_USER': 'admin',
+        'PROJECT_ROOT': '',
     }
 }

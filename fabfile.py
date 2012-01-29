@@ -28,6 +28,21 @@ def r():
 
 from fabric.contrib.console import confirm
 
+## try to implement this
+#def reload(first=False):
+    #""" Reload webserver/webapp """
+    #if hasattr(env, 'use_nginx'):
+        #if first==True:
+            #run("bash /home/%(user)s/%(project_name)s/bin/django_gunicorn start" % env)
+        #else:
+            #sudo("kill -QUIT `cat %(nginx_pidfile)s`" % env)
+            #run("bash /home/%(user)s/%(project_name)s/bin/django_gunicorn restart" % env)
+        #sudo("%(nginx_bin)s" % env)
+    #else:
+        #"Reload Apache to pick up new code changes."
+        #sudo("invoke-rc.d apache2 reload")
+
+
 
 #@run_once 
 def commit(msg): 
@@ -39,12 +54,12 @@ def commit(msg):
 def update_remote():
     env.user = fab['WEB_USER']
     
-    with cd('/srv/x/flt'): 
+    with cd(fab['PROJECT_ROOT']): 
         run('git pull origin master') # pull from repository to remote 
         #run('python manage.py collectstatic -v0 --noinput')
          
 def restart(): 
-    #sudo('supervisorctl restart flt')
+    sudo('supervisorctl restart flt')
     sudo('/etc/init.d/nginx restart')
          
 # def deploy(push_code=False): 

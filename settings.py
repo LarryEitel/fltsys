@@ -256,6 +256,7 @@ FABRIC = {
         'HOSTS': ['host.com'],
         'WEB_USER': 'www-data',
         'ADMIN_USER': 'admin',
+        'PROJECT_ROOT': '/srv/flt',
     }
 }
 # local_settings.py can be used to override environment-specific settings
