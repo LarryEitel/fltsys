@@ -1,6 +1,29 @@
-﻿import settings
+# -*- coding: utf-8 -*-
+import sys
+import socket
+import settings
 
-DEBUG = True
+# fabric settings
+FABRIC = {
+    'live': {
+        'HOSTS': ['host.com'],
+        'WEB_USER': 'www-data',
+        'ADMIN_USER': 'admin',
+        'PROJECT_ROOT': '/srv/flt',
+    }
+}
+
+EVERNOTE_SANDBOX = True
+
+# trying to get a clean windows virtual env
+PRODUCTION_SERVERS = ['xc',]
+if socket.gethostname() in PRODUCTION_SERVERS:
+    PRODUCTION = True
+    sys.path.append(FABRIC['live']['PROJECT_ROOT'])
+else:
+    PRODUCTION = False
+    
+DEBUG = not PRODUCTION
 TEMPLATE_DEBUG = DEBUG
 MEDIA_DEV_MODE = DEBUG
 
@@ -46,25 +69,15 @@ JSONDIR = os.path.join(settings.PROJECT_ROOT, "private", "json")
 
 GOOGLE_API_KEY = ''
 
-EVERNOTE_HOST = "sandbox.evernote.com" 
-EVERNOTE_CONSUMER_KEY = ''
-EVERNOTE_CONSUMER_SECRET = ''
-EVERNOTE_USER = ''
-EVERNOTE_PW = ''
-
-EVERNOTE_HOST = "evernote.com"
-EVERNOTE_CONSUMER_KEY = ''
-EVERNOTE_CONSUMER_SECRET = ''
-EVERNOTE_USER = ''
-EVERNOTE_PW = ''
-
-
-# fabric settings
-FABRIC = {
-    'live': {
-        'HOSTS': ['host.com'],
-        'WEB_USER': 'www-data',
-        'ADMIN_USER': 'admin',
-        'PROJECT_ROOT': '',
-    }
-}
+if EVERNOTE_SANDBOX:
+    EVERNOTE_HOST = "sandbox.evernote.com" 
+    EVERNOTE_CONSUMER_KEY = ''
+    EVERNOTE_CONSUMER_SECRET = ''
+    EVERNOTE_USER = ''
+    EVERNOTE_PW = ''
+else:
+    EVERNOTE_HOST = "evernote.com"
+    EVERNOTE_CONSUMER_KEY = ''
+    EVERNOTE_CONSUMER_SECRET = ''
+    EVERNOTE_USER = ''
+    EVERNOTE_PW = ''

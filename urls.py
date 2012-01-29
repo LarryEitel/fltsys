@@ -16,8 +16,7 @@ urlpatterns = patterns("",
 #        "template": "homepage.html",
 #    }, name="home"),
     url(r"^$", "home.views.home", name="home"),
-    
-    
+     
     url(r"evernote/", include('en.urls')),    
     
     

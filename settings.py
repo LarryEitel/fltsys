@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# Django settings for basic pinax project.
 import sys
 import os.path
 import posixpath
+import socket
 import pinax
 
 PINAX_ROOT = os.path.abspath(os.path.dirname(pinax.__file__))
@@ -10,14 +10,36 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
 sys.path.append(os.path.join(PROJECT_ROOT, "parts"))
 
-# tells Pinax to use the default theme
-PINAX_THEME = "default"
+# fabric settings
+FABRIC = {
+    'live': {
+        'HOSTS': ['host.com'],
+        'WEB_USER': 'www-data',
+        'ADMIN_USER': 'admin',
+        'PROJECT_ROOT': '/srv/flt',
+    }
+}
 
-DEBUG = True
+EVERNOTE_SANDBOX = True
+
+# trying to get a clean windows virtual env
+PRODUCTION_SERVERS = ['xc',]
+if socket.gethostname() in PRODUCTION_SERVERS:
+    PRODUCTION = True
+    sys.path.append(FABRIC['live']['PROJECT_ROOT'])
+else:
+    PRODUCTION = False
+    
+DEBUG = not PRODUCTION
 TEMPLATE_DEBUG = DEBUG
 
 # tells Pinax to serve media through the staticfiles app.
 SERVE_MEDIA = DEBUG
+
+
+# tells Pinax to use the default theme
+PINAX_THEME = "default"
+
 
 # django-compressor is turned off by default due to deployment overhead for
 # most users. See <URL> for more information
@@ -250,15 +272,70 @@ PAGINATION_DEFAULT_PAGINATION = 5
 PAGINATION_DEFAULT_WINDOW = 2
 
 
-# fabric settings
-FABRIC = {
-    'live': {
-        'HOSTS': ['host.com'],
-        'WEB_USER': 'www-data',
-        'ADMIN_USER': 'admin',
-        'PROJECT_ROOT': '/srv/flt',
+LOGS_ROOT = os.path.join(PROJECT_ROOT, '_logs')
+if not os.path.exists(LOGS_ROOT):
+    try:
+        os.mkdir(LOGS_ROOT)
+    except:
+        pass
+    
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            #'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+            'format': '%(levelname)s %(asctime)s %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'file':{
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOGS_ROOT, 'debug.log'),
+        },
+        'debug': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler', # set the logging class to log to a file
+            'formatter': 'verbose',         # define the formatter to associate
+            'filename': os.path.join(LOGS_ROOT, 'debug.log')  # log file
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'logview.debug': {               # define another logger
+            'handlers': ['debug'],  # associate a different handler
+            'level': 'DEBUG',                 # specify the logging level
+            'propagate': True,
+        },  
     }
 }
+
+if EVERNOTE_SANDBOX:
+    EVERNOTE_HOST = "sandbox.evernote.com" 
+    EVERNOTE_CONSUMER_KEY = ''
+    EVERNOTE_CONSUMER_SECRET = ''
+    EVERNOTE_USER = ''
+    EVERNOTE_PW = ''
+else:
+    EVERNOTE_HOST = "evernote.com"
+    EVERNOTE_CONSUMER_KEY = ''
+    EVERNOTE_CONSUMER_SECRET = ''
+    EVERNOTE_USER = ''
+    EVERNOTE_PW = ''
+
+
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.
 try:
