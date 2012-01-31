@@ -2,6 +2,8 @@
 
 {% load i18n %}
 
+{% load map_tags %}
+
 {% block head_title %}{% blocktrans %}Welcome!{% endblocktrans %}{% endblock %}
 
 {% block extra_head_js %}
@@ -9,4 +11,35 @@
 
 {% block body %}
 <div class="map_container"><div id="map" class="map16"></div></div>
+{% endblock %}
+
+{% block extra_body %}
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+    // media url
+    flt.static_url = '{{ STATIC_URL }}';
+
+    // basemap
+    flt.createBasemap('map');
+
+    // zoom and center
+    flt.map.setOptions({
+        zoom: 13,
+        center: new google.maps.LatLng(9.980516,-84.163063)
+    });
+
+    // add flt
+    {% for poly in polys %}
+    flt.createPoly({
+        'points': '{{ poly.encoded.points|fixbackslash }}',
+        'levels': '{{ poly.encoded.levels }}',
+        'zoomFactor': {{ poly.encoded.zoomFactor }},
+        'numLevels': {{ poly.encoded.numLevels }}
+    })
+    {% endfor %}
+});
+
+</script>
 {% endblock %}

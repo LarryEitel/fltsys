@@ -8,83 +8,85 @@ var flt = {
 
 
 flt.createBasemap = function (mapdiv) {
+
+    // map
     flt.map = new google.maps.Map(document.getElementById(mapdiv));
 
     // simple map style
     var simple_style =  [
-	{
-	    featureType: "administrative",
-	    elementType: "geometry",
-	    stylers: [
-		{ visibility: "off" }
-	    ]
-	},{
-	    featureType: "administrative",
-	    elementType: "labels",
-	    stylers: [
-		{ visibility: "on" },
-		{ hue: "#d70000" },
-		{ lightness: 10 },
-		{ saturation: -95 }
-	    ]
-	},{
-	    featureType: "landscape",
-	    elementType: "all",
-	    stylers: [
-		{ visibility: "off" }
-	    ]
-	},{
-	    featureType: "poi",
-	    elementType: "geometry",
-	    stylers: [
-		{ visibility: "off" }
-	    ]
-	},{
-	    featureType: "poi",
-	    elementType: "labels",
-	    stylers: [
-		{ visibility: "on" },
-		{ hue: "#d70000" },
-		{ lightness: 10 },
-		{ saturation: -95 }
-	    ]
-	},{
-	    featureType: "transit",
-	    elementType: "all",
-	    stylers: [
-		{ visibility: "off" }
-	    ]
-	},{
-	    featureType: "road",
-	    elementType: "geometry",
-	    stylers: [
-		{ hue: "#d70000" },
-		{ visibility: "simplified" },
-		{ lightness: 10 },
-		{ saturation: -95 }
-	    ]
-	},{
-	    featureType: "road",
-	    elementType: "labels",
-	    stylers: [
-		{ visibility: "off" }
-	    ]
-	},{
-	    featureType: "water",
-	    elementType: "geometry",
-	    stylers: [
-		{ visibility: "on" },
-		{ hue: "#0091ff" },
-		{ lightness: 30 },
-		{ saturation: -100 }
-	    ]
-	},{
-	    featureType: "water",
-	    elementType: "labels",
-	    stylers: [
-		{ visibility: "off" }
-	    ]
-	}
+        {
+            featureType: "administrative",
+            elementType: "geometry",
+            stylers: [
+                { visibility: "off" }
+            ]
+        },{
+            featureType: "administrative",
+            elementType: "labels",
+            stylers: [
+                { visibility: "on" },
+                { hue: "#d70000" },
+                { lightness: 10 },
+                { saturation: -95 }
+            ]
+        },{
+            featureType: "landscape",
+            elementType: "all",
+            stylers: [
+                { visibility: "off" }
+            ]
+        },{
+            featureType: "poi",
+            elementType: "geometry",
+            stylers: [
+                { visibility: "off" }
+            ]
+        },{
+            featureType: "poi",
+            elementType: "labels",
+            stylers: [
+                { visibility: "on" },
+                { hue: "#d70000" },
+                { lightness: 10 },
+                { saturation: -95 }
+            ]
+        },{
+            featureType: "transit",
+            elementType: "all",
+            stylers: [
+                { visibility: "off" }
+            ]
+        },{
+            featureType: "road",
+            elementType: "geometry",
+            stylers: [
+                { hue: "#d70000" },
+                { visibility: "simplified" },
+                { lightness: 10 },
+                { saturation: -95 }
+            ]
+        },{
+            featureType: "road",
+            elementType: "labels",
+            stylers: [
+                { visibility: "off" }
+            ]
+        },{
+            featureType: "water",
+            elementType: "geometry",
+            stylers: [
+                { visibility: "on" },
+                { hue: "#0091ff" },
+                { lightness: 30 },
+                { saturation: -100 }
+            ]
+        },{
+            featureType: "water",
+            elementType: "labels",
+            stylers: [
+                { visibility: "off" }
+            ]
+        }
     ];
 
     var simple_options = {
@@ -185,13 +187,13 @@ flt.createStationMarker = function (options) {
 
 
 // render flt
-flt.createPoly = function (options) {
-	var line = new google.maps.Polygon({
+flt.createflt = function (options) {
+	var line = new google.maps.Polyline({
 		path: google.maps.geometry.encoding.decodePath(options.points),
 		levels: flt.decodeLevels(options.levels),
 		strokeColor: '#4F7B41',
 		strokeOpacity: 0.9,
-		strokeWeight: 1,
+		strokeWeight: 6,
 		zoomFactor: options.zoomFactor, 
 		numLevels: options.numLevels,
 		map: flt.map
@@ -277,3 +279,63 @@ flt.explore.loadItems = function () {
 
 
 
+
+
+
+
+
+
+function initialize() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function(position){
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+                var coords = new google.maps.LatLng(latitude, longitude);
+                var mapOptions = {
+                    zoom: 15,
+                    center: coords,
+                    mapTypeControl: true,
+                    navigationControlOptions: {
+                        style: google.maps.NavigationControlStyle.SMALL
+                    },
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    map = new google.maps.Map(
+                        document.getElementById("map"), mapOptions
+                        );
+                    var marker = new google.maps.Marker({
+                        position: coords,
+                        map: map,
+                        title: "Your current location!"
+                    });
+
+    }
+);
+}else {
+    alert("Geolocation API is not supported in your browser.");
+    var coords = new google.maps.LatLng(9.980516,-84.163063);
+    var mapOptions = {
+        zoom: 15,
+        center: coords,
+        mapTypeControl: true,
+        navigationControlOptions: {
+            style: google.maps.NavigationControlStyle.SMALL
+        },
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(
+        document.getElementById("map"), mapOptions
+        );
+    var marker = new google.maps.Marker({
+        position: coords,
+        map: map,
+        title: "Your current location!"
+    });
+}
+
+}
+
+
+
+//google.maps.event.addDomListener(window, 'load', initialize);
