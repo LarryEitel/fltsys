@@ -26,19 +26,44 @@
 
     // zoom and center
     flt.map.setOptions({
-        zoom: 13,
+        zoom: 11,
         center: new google.maps.LatLng(9.980516,-84.163063)
     });
 
-    // add flt
-    {% for poly in polys %}
-    flt.createPoly({
-        'points': '{{ poly.encoded.points|fixbackslash }}',
-        'levels': '{{ poly.encoded.levels }}',
-        'zoomFactor': {{ poly.encoded.zoomFactor }},
-        'numLevels': {{ poly.encoded.numLevels }}
-    })
+    // add boundaries
+    
+    {% if polys %}
+	{% if polys and user.is_authenticated %}
+	    {% for poly in polys.congregations %}
+	    flt.createPoly({
+		'points': '{{ poly.encoded.points|fixbackslash }}',
+		'levels': '{{ poly.encoded.levels }}',
+		'zoomFactor': {{ poly.encoded.zoomFactor }},
+		'numLevels': {{ poly.encoded.numLevels }}
+	    })
+	    {% endfor %}
+	{% endif %}
+	
+	{% for poly in polys.territories %}
+	    flt.createPoly({
+		'points': '{{ poly.encoded.points|fixbackslash }}',
+		'levels': '{{ poly.encoded.levels }}',
+		'zoomFactor': {{ poly.encoded.zoomFactor }},
+		'numLevels': {{ poly.encoded.numLevels }}
+	    })
+	{% endfor %}
+    {% endif %}
+    
+    
+    // add en markers
+    {% for enpt in enpts %}
+	flt.createEnMarker({
+		'title': '{{ enpt.title }}',
+		'lat': {{ enpt.point.x }},
+		'lon': {{ enpt.point.y }},
+	});
     {% endfor %}
+		
 });
 
 </script>

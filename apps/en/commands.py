@@ -5,8 +5,18 @@ import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
 # a copy of this file should be copied to djboss app dir
-import wingdbstub
+#import wingdbstub
 
+
+@command
+def enupdtpoints(args):
+    """Set point field from lat/lon"""
+    
+    from models import ENNote
+    for note in ENNote.objects.filter(latitude__isnull = False):
+        note.ParseDetails()
+        note.save()
+        print note.id, note.title, note.point.wkt
 
 @command
 def enpoiparseall(args):

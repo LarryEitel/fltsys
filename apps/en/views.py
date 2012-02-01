@@ -7,8 +7,14 @@ from django.template import RequestContext
 from django.http import HttpResponse
 import logging
 from clevernote import CleverNote
+from models import ENNote
 
 logger_debug = logging.getLogger('logview.debug')
+
+def get_enpts():
+    enpts = ENNote.objects.filter(geocoded = True)
+    return enpts
+
 
 def index(request, *args, **kwargs):
     #print request.GET

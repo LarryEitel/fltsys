@@ -1,5 +1,6 @@
-#from django.contrib.gis.db import models
-from django.db import models
+# -*- coding: utf-8 -*-
+from django.contrib.gis.db import models
+#from django.db import models
 from django.contrib.auth.models import User
 from current_user import registration
 from django_extensions.db.models import TimeStampedModel
@@ -12,7 +13,7 @@ class ENNote(MyModel):
     owner =  CurrentUserField(blank=True, related_name = "flt_evernote_owner", default=1)
     modifier = CurrentUserField(blank=True, related_name = "flt_evernote_modifier", default=1)
     
-    
+    point = models.PointField("LatLng", default='POINT(0 0)')
     active = models.BooleanField("Active?", default=False) 
     geocoded = models.BooleanField("GeoCoded?", default=False) 
     guid = models.CharField("GUID", max_length=64, db_index=True)   
@@ -31,7 +32,7 @@ class ENNote(MyModel):
     enupdated = models.DateTimeField("EN Updated", null=True, blank=True)
     endeleted = models.DateTimeField("EN Deleted", null=True, blank=True)
     updateSequenceNum = models.IntegerField("Style ID", null=True, blank=True)
-    #objects = models.GeoManager()
+    objects = models.GeoManager()
 
     
     
@@ -63,6 +64,12 @@ class ENNote(MyModel):
 	    pubs = getpubs()
 	    if initials in pubs:
 		self.author = pubs[initials] + (" (_%s)" % initials)
+		
+	if self.latitude and self.longitude:
+	    from django.contrib.gis.geos import Point
+	    self.point = Point(self.latitude, self.longitude)
+	    
+		
 	
     def UpdateFromEN(self, note, cn):
         import datetime

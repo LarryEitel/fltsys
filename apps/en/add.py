@@ -12,10 +12,10 @@ import evernote.edam.type.ttypes as Types
 import evernote.edam.error.ttypes as Errors
 
 import settings
-username = settings.EN_USER
-password = settings.EN_PW
-consumerKey = settings.EN_CONSUMER_KEY
-consumerSecret = settings.EN_CONSUMER_SECRET
+username = settings.EVERNOTE_USER
+password = settings.EVERNOTE_PW
+consumerKey = settings.EVERNOTE_CONSUMER_KEY
+consumerSecret = settings.EVERNOTE_CONSUMER_SECRET
 
 evernoteHost = "evernote.com"
 userStoreUri = "https://" + evernoteHost + "/edam/user"
